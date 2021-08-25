@@ -1,0 +1,16 @@
+[
+    {
+        "model": "client.ClientStatut",
+        "pk": 1,
+        "fields": {
+            "Name": "Actual"
+        }
+    },
+    {
+        "model": "client.ClientStatut",
+        "pk": 2,
+        "fields": {
+            "Name": "Potential"
+        }
+    }
+]
