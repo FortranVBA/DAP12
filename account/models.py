@@ -9,9 +9,8 @@ class StaffProfile(models.Model):
   
   Name = models.CharField(max_length=25)
 
-DEFAULT_PROFILE_ID = 1
+DEFAULT_PROFILE_ID = 4
 class Staff(AbstractUser):
     """Staff model."""
-    pass
-    #StaffProfileID = models.ForeignKey(to=StaffProfile, on_delete=models.CASCADE, 
-    #default=DEFAULT_PROFILE_ID)
+    StaffProfileID = models.ForeignKey(to=StaffProfile, on_delete=models.CASCADE, 
+    default=DEFAULT_PROFILE_ID)
