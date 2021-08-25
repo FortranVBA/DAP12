@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", TokenObtainPairView.as_view()),
     path("login/refresh/", TokenRefreshView.as_view()),
-    path("signup/", SignUpView.as_view()),    
+    path("users/", SignUpView.as_view()),    
 ]
