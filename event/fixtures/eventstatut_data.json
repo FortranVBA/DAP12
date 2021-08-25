@@ -1,0 +1,16 @@
+[
+    {
+        "model": "event.EventStatut",
+        "pk": 1,
+        "fields": {
+            "Name": "Past"
+        }
+    },
+    {
+        "model": "event.EventStatut",
+        "pk": 2,
+        "fields": {
+            "Name": "Scheduled"
+        }
+    }
+]

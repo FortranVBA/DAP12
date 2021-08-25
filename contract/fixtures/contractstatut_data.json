@@ -1,0 +1,16 @@
+[
+    {
+        "model": "contract.ContractStatut",
+        "pk": 1,
+        "fields": {
+            "Name": "Signed"
+        }
+    },
+    {
+        "model": "contract.ContractStatut",
+        "pk": 2,
+        "fields": {
+            "Name": "NotSigned"
+        }
+    }
+]

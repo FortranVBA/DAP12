@@ -76,5 +76,9 @@ Once you have launched the server, the Django default admin panel can be reached
 The super user admin has the following login:
 -	Username: admin ; Password: admin
 
-
+./manage.py loaddata staffprofile_data.json
 ./manage.py loaddata clientstatut_data.json
+./manage.py loaddata contractstatut_data.json
+./manage.py loaddata eventstatut_data.json
+
+

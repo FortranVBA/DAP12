@@ -1,0 +1,30 @@
+[
+    {
+        "model": "account.StaffProfile",
+        "pk": 1,
+        "fields": {
+            "Name": "Gestion"
+        }
+    },
+    {
+        "model": "account.StaffProfile",
+        "pk": 2,
+        "fields": {
+            "Name": "Vente"
+        }
+    },
+    {
+        "model": "account.StaffProfile",
+        "pk": 3,
+        "fields": {
+            "Name": "Support"
+        }
+    },
+    {
+        "model": "account.StaffProfile",
+        "pk": 4,
+        "fields": {
+            "Name": "Default"
+        }
+    }
+]
