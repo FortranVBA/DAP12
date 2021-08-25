@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
+    "account.apps.AccountConfig",
+    "client.apps.ClientConfig",
+    "contract.apps.ContractConfig",
+    "event.apps.EventConfig",
 ]
 
 MIDDLEWARE = [
@@ -93,6 +98,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = "account.Staff"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
