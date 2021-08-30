@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from account.views import SignUpView
+from account.views import SignUpView, StaffModelsViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r"users", StaffModelsViewSet, basename="users")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", TokenObtainPairView.as_view()),
     path("login/refresh/", TokenRefreshView.as_view()),
-    path("users/", SignUpView.as_view()),    
+    #path("users/", SignUpView.as_view()),    
 ]
+
+urlpatterns += router.urls

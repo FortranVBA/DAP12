@@ -12,7 +12,7 @@ class ContractStatut(models.Model):
 class Contract(models.Model):
     """Contract model."""
 
-    Client = models.ForeignKey(to=Staff, on_delete=models.CASCADE)
+    ClientID = models.ForeignKey(to=Staff, on_delete=models.CASCADE)
     DateCreated = models.DateTimeField(auto_now_add=True)
     DateUpdated = models.DateTimeField(auto_now=True)
     Amount = models.FloatField()
