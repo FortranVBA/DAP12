@@ -1,0 +1,47 @@
+[
+    {
+        "model": "account.Staff",
+        "pk": 1,
+        "fields": {
+            "username": "StaffGestionA",
+            "password": "a1z2e3r4",
+            "StaffProfileID": 1
+        }
+    },
+    {
+        "model": "account.Staff",
+        "pk": 2,
+        "fields": {
+            "username": "StaffGestionB",
+            "password": "a1z2e3r4",
+            "StaffProfileID": 1
+        }
+    },
+    {
+        "model": "account.Staff",
+        "pk": 3,
+        "fields": {
+            "username": "StaffVenteA",
+            "password": "a1z2e3r4",
+            "StaffProfileID": 2
+        }
+    },
+    {
+        "model": "account.Staff",
+        "pk": 4,
+        "fields": {
+            "username": "SupportA",
+            "password": "a1z2e3r4",
+            "StaffProfileID": 3
+        }
+    },
+    {
+        "model": "account.Staff",
+        "pk": 4,
+        "fields": {
+            "username": "SupportB",
+            "password": "a1z2e3r4",
+            "StaffProfileID": 3
+        }
+    }
+]
