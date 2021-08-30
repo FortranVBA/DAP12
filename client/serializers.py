@@ -1,4 +1,4 @@
-"""Project OC DAP 12 - Client models file."""
+"""Project OC DAP 12 - Client serializer file."""
 
 from .models import Client
 from rest_framework import serializers
@@ -14,6 +14,7 @@ class ClientSerializer(serializers.ModelSerializer):
 
         model = Client
         fields = [
+            "pk",
             "FirstName",
             "LastName",
             "Email",
@@ -25,16 +26,3 @@ class ClientSerializer(serializers.ModelSerializer):
             "SalesContactID",
             "ClientStatutID",
         ]
-
-        extra_kwargs = {
-            "SalesContactID": {"required": False},
-            "ClientStatutID": {"required": False},
-        }
-
-
-    def create(self, validated_data):
-        """Create client."""
-        #validated_data["SalesContactID"] = 
-        #validated_data["ClientStatutID"] = 
-
-        return super().create(validated_data)

@@ -1,0 +1,1201 @@
+{
+	"info": {
+		"_postman_id": "a4b6255d-d02b-4806-a4d9-5f7cc3cf3030",
+		"name": "DAP12",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);\r",
+									"pm.collectionVariables.set(\"token_refresh\", jsonData.refresh);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ProjectMaker",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "a1z2e3r4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"login",
+								""
+							]
+						},
+						"description": "Login as a previously registered user.\n\n### Expected fields in request body\n\n- **username** : Username of the previously registered user.\n- **password** : Password of the previously registered user.\n\n### Keys returned in response body\n\n- **refresh** : Refresh token to be used for refreshing login end point. The value is automatically assigned to the collection variable `token_refresh`.\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "refresh login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/login/refresh/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"login",
+								"refresh",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "add staff",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "aze",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "a1z2e3r4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/users/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "patch staff",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "azer",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "a1z2e3r4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/users/6/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"6",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "delete staff",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/users/6/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"6",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "list staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/users/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "detail staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/users/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"1",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "client",
+			"item": [
+				{
+					"name": "list clients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clients/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clients",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "add client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "FirstName",
+									"value": "JohnD",
+									"type": "text"
+								},
+								{
+									"key": "LastName",
+									"value": "SmithD",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "jsd@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "Phone",
+									"value": "+33123456789",
+									"type": "text"
+								},
+								{
+									"key": "Mobile",
+									"value": "+33623456789",
+									"type": "text"
+								},
+								{
+									"key": "CompanyName",
+									"value": "ClientD",
+									"type": "text"
+								},
+								{
+									"key": "SalesContactID",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "ClientStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clients/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clients",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "patch client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "FirstName",
+									"value": "JohnE",
+									"type": "text"
+								},
+								{
+									"key": "LastName",
+									"value": "SmithD",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "jsd@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "Phone",
+									"value": "+33123456789",
+									"type": "text"
+								},
+								{
+									"key": "Mobile",
+									"value": "+33623456789",
+									"type": "text"
+								},
+								{
+									"key": "CompanyName",
+									"value": "ClientD",
+									"type": "text"
+								},
+								{
+									"key": "SalesContactID",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "ClientStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clients/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clients",
+								"4",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "detail client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clients/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clients",
+								"4",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "delete client (dev only)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clients/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clients",
+								"4",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contract",
+			"item": [
+				{
+					"name": "list contracts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "detail contract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								"1",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "add contract",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ClientID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Amount",
+									"value": "888",
+									"type": "text"
+								},
+								{
+									"key": "PaymentDue",
+									"value": "2021-10-22 13:30:00",
+									"type": "text"
+								},
+								{
+									"key": "ContractStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "patch contract",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ClientID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Amount",
+									"value": "8889",
+									"type": "text"
+								},
+								{
+									"key": "PaymentDue",
+									"value": "2021-10-22 13:30:00",
+									"type": "text"
+								},
+								{
+									"key": "ContractStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								"4",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "delete contract (dev only)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								"4",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "list events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/events/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "duplicate event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/events/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								"1",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				},
+				{
+					"name": "add event",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ContractID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Attendees",
+									"value": "800",
+									"type": "text"
+								},
+								{
+									"key": "EventDate",
+									"value": "2001-10-23 13:30:00",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "Notesss",
+									"type": "text"
+								},
+								{
+									"key": "SupportContactID",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "EventStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/events/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "patch event",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ContractID",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Attendees",
+									"value": "800",
+									"type": "text"
+								},
+								{
+									"key": "EventDate",
+									"value": "2001-10-23 13:30:00",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "Nooootes",
+									"type": "text"
+								},
+								{
+									"key": "SupportContactID",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "EventStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/events/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								"4",
+								""
+							]
+						},
+						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+					},
+					"response": []
+				},
+				{
+					"name": "delete event (dev only)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{token_refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/events/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								"4",
+								""
+							]
+						},
+						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "token_refresh",
+			"value": ""
+		}
+	]
+}

@@ -81,4 +81,7 @@ The super user admin has the following login:
 ./manage.py loaddata contractstatut_data.json
 ./manage.py loaddata eventstatut_data.json
 ./manage.py loaddata staff_data.json
+./manage.py loaddata client_data.json
+./manage.py loaddata contract_data.json
+./manage.py loaddata event_data.json
 

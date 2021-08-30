@@ -1,0 +1,44 @@
+[
+    {
+        "model": "event.Event",
+        "pk": 1,
+        "fields": {
+            "ContractID": 1,
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "Attendees": "50",
+            "EventDate": "2001-10-23 13:30:00",
+            "Notes": "",
+            "SupportContactID": 4,
+            "EventStatutID": 2
+        }
+    },
+    {
+        "model": "event.Event",
+        "pk": 2,
+        "fields": {
+            "ContractID": 1,
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "Attendees": "90",
+            "EventDate": "2021-10-23 13:30:00",
+            "Notes": "",
+            "SupportContactID": 5,
+            "EventStatutID": 2
+        }
+    },
+    {
+        "model": "event.Event",
+        "pk": 3,
+        "fields": {
+            "ContractID": 2,
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "Attendees": "11",
+            "EventDate": "2021-10-23 13:30:00",
+            "Notes": "",
+            "SupportContactID": 4,
+            "EventStatutID": 2
+        }
+    }
+]

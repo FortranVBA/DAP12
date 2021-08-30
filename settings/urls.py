@@ -17,16 +17,21 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from account.views import SignUpView, StaffModelsViewSet
+from client.views import ClientModelViewSet
+from contract.views import ContractModelViewSet
+from event.views import EventModelViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r"users", StaffModelsViewSet, basename="users")
+router.register(r"clients", ClientModelViewSet, basename="clients")
+router.register(r"contracts", ContractModelViewSet, basename="contracts")
+router.register(r"events", EventModelViewSet, basename="events")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", TokenObtainPairView.as_view()),
     path("login/refresh/", TokenRefreshView.as_view()),
-    #path("users/", SignUpView.as_view()),    
 ]
 
 urlpatterns += router.urls

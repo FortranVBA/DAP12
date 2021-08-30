@@ -12,16 +12,16 @@
         "model": "account.Staff",
         "pk": 2,
         "fields": {
-            "username": "StaffGestionB",
+            "username": "StaffVenteA",
             "password": "a1z2e3r4",
-            "StaffProfileID": 1
+            "StaffProfileID": 2
         }
     },
     {
         "model": "account.Staff",
         "pk": 3,
         "fields": {
-            "username": "StaffVenteA",
+            "username": "StaffVenteB",
             "password": "a1z2e3r4",
             "StaffProfileID": 2
         }
@@ -37,7 +37,7 @@
     },
     {
         "model": "account.Staff",
-        "pk": 4,
+        "pk": 5,
         "fields": {
             "username": "SupportB",
             "password": "a1z2e3r4",

@@ -1,0 +1,38 @@
+[
+    {
+        "model": "contract.Contract",
+        "pk": 1,
+        "fields": {
+            "ClientID": 1,
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "Amount": "500.59",
+            "PaymentDue": "2021-10-22 13:30:00",
+            "ContractStatutID": 2
+        }
+    },
+    {
+        "model": "contract.Contract",
+        "pk": 2,
+        "fields": {
+            "ClientID": 2,
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "Amount": "900",
+            "PaymentDue": "2020-10-22 13:00:00",
+            "ContractStatutID": 2
+        }
+    },
+    {
+        "model": "contract.Contract",
+        "pk": 3,
+        "fields": {
+            "ClientID": 3,
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "Amount": "9050",
+            "PaymentDue": "2020-10-22 13:00:00",
+            "ContractStatutID": 1
+        }
+    }
+]

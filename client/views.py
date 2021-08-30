@@ -14,3 +14,4 @@ class ClientModelViewSet(viewsets.ModelViewSet):
     """Client viewset."""
 
     serializer_class = ClientSerializer
+    queryset = Client.objects.all()

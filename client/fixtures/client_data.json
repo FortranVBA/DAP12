@@ -1,0 +1,50 @@
+[
+    {
+        "model": "client.Client",
+        "pk": 1,
+        "fields": {
+            "FirstName": "JohnA",
+            "LastName": "SmithA",
+            "Email": "jsa@mail.com",
+            "Phone": "+33123456789",
+            "Mobile": "+33623456789",
+            "CompanyName": "ClientA",
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "SalesContactID": 2,
+            "ClientStatutID": 2
+        }
+    },
+    {
+        "model": "client.Client",
+        "pk": 2,
+        "fields": {
+            "FirstName": "JohnB",
+            "LastName": "SmithB",
+            "Email": "jsb@mail.com",
+            "Phone": "+33123456789",
+            "Mobile": "+33623456789",
+            "CompanyName": "ClientB",
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "SalesContactID": 3,
+            "ClientStatutID": 2
+        }
+    },
+    {
+        "model": "client.Client",
+        "pk": 3,
+        "fields": {
+            "FirstName": "JohnC",
+            "LastName": "SmithC",
+            "Email": "jsc@mail.com",
+            "Phone": "+33123456789",
+            "Mobile": "+33623456789",
+            "CompanyName": "ClientC",
+            "DateCreated": "2020-03-27 10:00:00",
+            "DateUpdated": "2020-03-27 10:00:00",
+            "SalesContactID": 2,
+            "ClientStatutID": 1
+        }
+    }
+]
