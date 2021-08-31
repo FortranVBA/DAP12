@@ -3,8 +3,8 @@
         "model": "account.Staff",
         "pk": 1,
         "fields": {
-            "username": "StaffGestionA",
-            "password": "a1z2e3r4",
+            "username": "StaffManagementA",
+            "password": "pbkdf2_sha256$260000$ff0HCvnRP64jfX75EPMZnZ$fG/iLEYiLuQfZPlzJIJVQOTkbzJbRrC0BMY9RkYppfE=",
             "StaffProfileID": 1
         }
     },
@@ -12,8 +12,8 @@
         "model": "account.Staff",
         "pk": 2,
         "fields": {
-            "username": "StaffVenteA",
-            "password": "a1z2e3r4",
+            "username": "StaffManagementB",
+            "password": "pbkdf2_sha256$260000$Um1Kwvm1nS3QYwZkefcelD$BGRVImbMkldvYIsa4Hg7lBCxuZ5nC0gtXrzH7AWWp3s=",
             "StaffProfileID": 2
         }
     },
@@ -21,8 +21,8 @@
         "model": "account.Staff",
         "pk": 3,
         "fields": {
-            "username": "StaffVenteB",
-            "password": "a1z2e3r4",
+            "username": "StaffSalesA",
+            "password": "pbkdf2_sha256$260000$gUZ1fIpHQV8o5tAuRjuFKs$Bqyazs7OuJK7AEikHHtB3dLgDGfhu0NwkD/2Y9X+118=",
             "StaffProfileID": 2
         }
     },
@@ -30,8 +30,8 @@
         "model": "account.Staff",
         "pk": 4,
         "fields": {
-            "username": "SupportA",
-            "password": "a1z2e3r4",
+            "username": "StaffSupportA",
+            "password": "pbkdf2_sha256$260000$GsgWIUnYyevesXQHoZ2UQ1$xMLD9gJKbnssl4zzbKnCv9d3cJ5Bxn2Y/Y0hD7+ZbiA=",
             "StaffProfileID": 3
         }
     },
@@ -39,8 +39,8 @@
         "model": "account.Staff",
         "pk": 5,
         "fields": {
-            "username": "SupportB",
-            "password": "a1z2e3r4",
+            "username": "StaffSupportB",
+            "password": "pbkdf2_sha256$260000$cDff1vHAteviltlkTWklrg$kcZ9L/nNWHq/Gno0Lr9RS3Hh8td53RdKcrdbczpe7IM=",
             "StaffProfileID": 3
         }
     }

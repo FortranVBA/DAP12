@@ -29,9 +29,9 @@ router.register(r"contracts", ContractModelViewSet, basename="contracts")
 router.register(r"events", EventModelViewSet, basename="events")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("login/", TokenObtainPairView.as_view()),
-    path("login/refresh/", TokenRefreshView.as_view()),
+    path('admin/', admin.site.urls, name='admin'),
+    path("login/", TokenObtainPairView.as_view(), name='login'),
+    path("login/refresh/", TokenRefreshView.as_view(), name='refresh'),
 ]
 
 urlpatterns += router.urls
