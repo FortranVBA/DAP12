@@ -35,12 +35,3 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["CompanyName"], "ClientA")
 
 
-#def test_list_client_as_management(client):
-#    response = client.post('/login/', data={"UserName":"StaffGestionA"})
-#    JWT = response.JWT
-
-#    response = client.get('/clients/')
-#    assert response.status_code == 200
-#    assert b"ClientA" in response.data
-#    assert b"ClientB" in response.data
-#    assert b"ClientC" in response.data
