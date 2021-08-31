@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from account.views import SignUpView, StaffModelsViewSet
+from account.views import StaffModelsViewSet
 from client.views import ClientModelViewSet
 from contract.views import ContractModelViewSet
 from event.views import EventModelViewSet

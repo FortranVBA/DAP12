@@ -6,20 +6,20 @@
 #    assert b"JWT" in response.data
 
 
-def test_failed_authentification(client):
-    response = client.post('/login/', data={"UserName":"UnknownUser"})
-    assert response.status_code == 200
-    assert b"Error" in response.data
+#def test_failed_authentification(client):
+#    response = client.post('/login/', data={"UserName":"UnknownUser"})
+#    assert response.status_code == 200
+#    assert b"Error" in response.data
 
-def test_add_user_as_management(client):
-    response = client.post('/login/', data={"UserName":"StaffGestionA"})
-    JWT = response.JWT
+#def test_add_user_as_management(client):
+#    response = client.post('/login/', data={"UserName":"StaffGestionA"})
+#    JWT = response.JWT
 
-    response = client.post('/users/', data={"CompanyName":"NewCompany", 
-    "StaffProfile":"Vente"}, JWT=JWT)
-    assert response.status_code == 201
-    assert b"NewCompany" in response.data
-    assert b"Vente" in response.data
+#    response = client.post('/users/', data={"CompanyName":"NewCompany", 
+#    "StaffProfile":"Vente"}, JWT=JWT)
+#    assert response.status_code == 201
+#    assert b"NewCompany" in response.data
+#    assert b"Vente" in response.data
 
 def test_add_user_as_sales(client):
     response = client.post('/login/', data={"UserName":"StaffVenteA"})
