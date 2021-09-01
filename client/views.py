@@ -30,7 +30,7 @@ class IsSale(permissions.BasePermission):
 class IsSalesContactOrManagement(permissions.BasePermission):
     """Permission checking if user is a project contributor or author."""
 
-    message = "You must be the sales contact of this project."
+    message = "You must be the sales contact of this project or from management team."
 
     def has_permission(self, request, view):
         """Check the object permission."""
@@ -39,7 +39,6 @@ class IsSalesContactOrManagement(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         """Check the object permission."""
-        #breakpoint()
         if request.user.StaffProfileID.Name == "Vente":
             return request.user == obj.SalesContactID
 
