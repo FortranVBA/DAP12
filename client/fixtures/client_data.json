@@ -11,7 +11,7 @@
             "CompanyName": "ClientA",
             "DateCreated": "2020-03-27 10:00:00",
             "DateUpdated": "2020-03-27 10:00:00",
-            "SalesContactID": 2,
+            "SalesContactID": 3,
             "ClientStatutID": 2
         }
     },
@@ -27,7 +27,7 @@
             "CompanyName": "ClientB",
             "DateCreated": "2020-03-27 10:00:00",
             "DateUpdated": "2020-03-27 10:00:00",
-            "SalesContactID": 3,
+            "SalesContactID": 4,
             "ClientStatutID": 2
         }
     },
@@ -43,7 +43,7 @@
             "CompanyName": "ClientC",
             "DateCreated": "2020-03-27 10:00:00",
             "DateUpdated": "2020-03-27 10:00:00",
-            "SalesContactID": 2,
+            "SalesContactID": 3,
             "ClientStatutID": 1
         }
     }
