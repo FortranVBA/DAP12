@@ -9,7 +9,7 @@
             "Attendees": "50",
             "EventDate": "2001-10-23 13:30:00",
             "Notes": "",
-            "SupportContactID": 4,
+            "SupportContactID": 5,
             "EventStatutID": 2
         }
     },
@@ -23,7 +23,7 @@
             "Attendees": "90",
             "EventDate": "2021-10-23 13:30:00",
             "Notes": "",
-            "SupportContactID": 5,
+            "SupportContactID": 6,
             "EventStatutID": 2
         }
     },
@@ -37,7 +37,7 @@
             "Attendees": "11",
             "EventDate": "2021-10-23 13:30:00",
             "Notes": "",
-            "SupportContactID": 4,
+            "SupportContactID": 5,
             "EventStatutID": 2
         }
     }
