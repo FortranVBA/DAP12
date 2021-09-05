@@ -2,11 +2,14 @@
 
 from .serializers import ContractSerializer
 from .models import Contract
+from event.serializers import EventSerializer
+from event.models import Event
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 
 # Create your views here.
 class NotAllowed(permissions.BasePermission):
@@ -49,9 +52,10 @@ class ContractModelViewSet(viewsets.ModelViewSet):
 
     serializer_class = ContractSerializer
     queryset = Contract.objects.all()
+
     def get_permissions(self):
         """Instantiate and returns the list of permissions that this view requires."""
-        if self.action in ["list", 'retrieve']:
+        if self.action in ["list", 'retrieve', 'events']:
             permission_classes = [IsAuthenticated]
         elif self.action in ["create"]:
             permission_classes = [IsAuthenticated, IsSale]
@@ -61,3 +65,11 @@ class ContractModelViewSet(viewsets.ModelViewSet):
             permission_classes = [NotAllowed]
 
         return [permission() for permission in permission_classes]
+
+    @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated])
+    def events(self, request, pk=None):
+        contract = Contract.objects.get(id = pk)
+        queryset = Event.objects.filter(ContractID=contract)
+
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)        

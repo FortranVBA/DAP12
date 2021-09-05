@@ -236,3 +236,61 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["Amount"], 54321)
 
+
+    def test_list_contract_event_as_management(self):
+        url = reverse('login')
+        data = {'username': 'StaffManagementA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('contracts-events', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_list_contract_event_as_sales(self):
+        url = reverse('login')
+        data = {'username': 'StaffSalesA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('contracts-events', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_list_contract_event_as_support(self):
+        url = reverse('login')
+        data = {'username': 'StaffSupportA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('contracts-events', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_list_contract_event_with_fake_JWT(self):
+        token = 'Fake_Token'
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('contracts-events', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_list_contract_event_without_JWT(self):
+        url = reverse('contracts-events', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
