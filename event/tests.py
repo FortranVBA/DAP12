@@ -116,6 +116,27 @@ class EventTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_add_event_with_wrong_sales_contact(self):
+        url = reverse('login')
+        data = {'username': 'StaffSalesA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('events-list')
+        data = {
+            'ContractID': 1, 
+            'Attendees': 800,
+            'EventDate': '2001-10-23 13:30:00',
+            'Notes': "",
+            'SupportContactID': 1,
+            'EventStatutID': 2
+            }
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_add_event_as_support(self):
         url = reverse('login')
         data = {'username': 'StaffSupportA', 'password': 'password'}
@@ -184,6 +205,20 @@ class EventTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["Attendees"], 54321)
+
+    def test_modify_event_with_wrong_sales_contact(self):
+        url = reverse('login')
+        data = {'username': 'StaffManagementA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('events-detail', kwargs = {'pk': 1})
+        data = {'SupportContactID': 1}
+        response = self.client.patch(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_modify_event_as_sales_contact(self):
         url = reverse('login')

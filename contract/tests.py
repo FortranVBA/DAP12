@@ -365,7 +365,7 @@ class ContractTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_modify_contract_statut__already_actual(self):
+    def test_modify_contract_statut_already_actual(self):
         url = reverse('login')
         data = {'username': 'StaffSalesA', 'password': 'password'}
         response = self.client.post(url, data, format='json')

@@ -25,3 +25,12 @@ class EventSerializer(serializers.ModelSerializer):
             "EventStatutID"
         ]
 
+    def validate(self, data):
+        if 'SupportContactID' in data:
+            staff = data['SupportContactID']
+
+            if staff.StaffProfileID.Name != "Support":
+                raise serializers.ValidationError("SupportContactID must be from the"
+                " support team.")
+
+        return super().validate(data)
