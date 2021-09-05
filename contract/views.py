@@ -30,6 +30,19 @@ class IsSale(permissions.BasePermission):
         """Check the object permission."""
         return request.user.StaffProfileID.Name == "Vente"
 
+class IsSaleContact(permissions.BasePermission):
+    """Permission that denies all users."""
+
+    message = "You must be the sales contact for this operation."
+
+    def has_permission(self, request, view):
+        """Check the object permission."""
+        return request.user.StaffProfileID.Name == "Vente"
+
+    def has_object_permission(self, request, view, obj):
+        """Check the object permission."""
+        return request.user == obj.ClientID.SalesContactID
+
 class IsSalesContactOrManagement(permissions.BasePermission):
     """Permission checking if user is a project contributor or author."""
 
@@ -61,6 +74,8 @@ class ContractModelViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated, IsSale]
         elif self.action in ["partial_update"]:
             permission_classes = [IsAuthenticated, IsSalesContactOrManagement]              
+        elif self.action in ["change_status"]:
+            permission_classes = [IsAuthenticated, IsSaleContact]              
         else:
             permission_classes = [NotAllowed]
 
@@ -72,4 +87,20 @@ class ContractModelViewSet(viewsets.ModelViewSet):
         queryset = Event.objects.filter(ContractID=contract)
 
         serializer = EventSerializer(queryset, many=True)
-        return Response(serializer.data)        
+        return Response(serializer.data)
+
+    @action(methods=['post'], detail=True, permission_classes=[IsAuthenticated, 
+    IsSaleContact])
+    def change_status(self, request, pk=None):
+        contract = Contract.objects.get(id = pk)
+        self.check_object_permissions(request, contract)
+        if contract.ContractStatutID.id != 1: 
+            serializer = ContractSerializer(contract, data = {'ContractStatutID': '1'}, 
+            partial=True)
+        
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+        
+        return Response({'Error': 'Contract already has this status.'}, 
+        status=status.HTTP_400_BAD_REQUEST)
