@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 import json
 
+from account.models import Staff
+
 class ContractTests(APITestCase):
     fixtures = [
         "staffprofile_data.json", 
@@ -16,12 +18,8 @@ class ContractTests(APITestCase):
         ]   
 
     def test_list_contract_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-list')
         response = self.client.get(url)
@@ -30,12 +28,8 @@ class ContractTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_list_contract_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-list')
         response = self.client.get(url)
@@ -44,12 +38,8 @@ class ContractTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_list_contract_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-list')
         response = self.client.get(url)
@@ -75,12 +65,8 @@ class ContractTests(APITestCase):
 
 
     def test_add_contract_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-list')
         data = {
@@ -94,12 +80,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_contract_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-list')
         data = {
@@ -113,12 +95,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_add_contract_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-list')
         data = {
@@ -161,12 +139,8 @@ class ContractTests(APITestCase):
 
 
     def test_modify_contract_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesB', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesB')
+        self.client.force_authenticate(user)
 
         url = reverse('contracts-detail', kwargs = {'pk': 1})
         data = {'Amount': 12345}
@@ -175,12 +149,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_contract_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)        
 
         url = reverse('contracts-detail', kwargs = {'pk': 1})
         data = {'Amount': 12345}
@@ -207,12 +177,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_modify_contract_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)       
 
         url = reverse('contracts-detail', kwargs = {'pk': 1})
         data = {'Amount': 12345}
@@ -222,12 +188,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.data["Amount"], 12345)
 
     def test_modify_contract_as_sales_contact(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)    
 
         url = reverse('contracts-detail', kwargs = {'pk': 1})
         data = {'Amount': 54321}
@@ -238,12 +200,8 @@ class ContractTests(APITestCase):
 
 
     def test_list_contract_event_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-events', kwargs = {'pk': 1})
         response = self.client.get(url)
@@ -252,12 +210,8 @@ class ContractTests(APITestCase):
         self.assertEqual(len(response.data), 2)
 
     def test_list_contract_event_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-events', kwargs = {'pk': 1})
         response = self.client.get(url)
@@ -266,12 +220,8 @@ class ContractTests(APITestCase):
         self.assertEqual(len(response.data), 2)
 
     def test_list_contract_event_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-events', kwargs = {'pk': 1})
         response = self.client.get(url)
@@ -297,12 +247,8 @@ class ContractTests(APITestCase):
 
 
     def test_modify_contract_statut_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -310,12 +256,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_contract_statut_as_sales_contact(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -324,12 +266,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.data["ContractStatutID"], 1)
 
     def test_modify_contract_statut_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesB', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesB')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -337,12 +275,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_contract_statut_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -366,12 +300,8 @@ class ContractTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_modify_contract_statut_already_actual(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)  
 
         url = reverse('contracts-change-status', kwargs = {'pk': 3})
         response = self.client.post(url, format='json')

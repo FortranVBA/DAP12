@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 import json
 
+from account.models import Staff
+
 class ClientTests(APITestCase):
     fixtures = [
         "staffprofile_data.json", 
@@ -16,15 +18,8 @@ class ClientTests(APITestCase):
         ]   
 
     def test_list_client_as_management(self):
-        """
-        Test a successful authentification.
-        """
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         response = self.client.get(url)
@@ -33,12 +28,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_retrieve_client_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-detail', kwargs = {'pk': 1})
         response = self.client.get(url)
@@ -47,12 +38,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["CompanyName"], "ClientA")
 
     def test_list_client_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         response = self.client.get(url)
@@ -61,12 +48,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_list_client_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         response = self.client.get(url)
@@ -93,12 +76,8 @@ class ClientTests(APITestCase):
 
 
     def test_add_client_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         data = {
@@ -116,12 +95,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_client_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         data = {
@@ -139,12 +114,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_add_client_with_wrong_sales_contact(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         data = {
@@ -162,12 +133,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_add_client_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-list')
         data = {
@@ -221,13 +188,20 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-    def test_modify_client_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesB', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
+    def test_modify_client_as_management(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        data = {'CompanyName': 'ModifCompanyName2'}
+        response = self.client.patch(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["CompanyName"], "ModifCompanyName2")
+
+    def test_modify_client_as_sales(self):
+        user = Staff.objects.get(username = 'StaffSalesB')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-detail', kwargs = {'pk': 1})
         data = {'CompanyName': 'ModifCompanyName'}
@@ -235,13 +209,30 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_modify_client_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
+    def test_modify_client_as_sales_contact(self):
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        data = {'CompanyName': 'ModifCompanyName'}
+        response = self.client.patch(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["CompanyName"], "ModifCompanyName")
+
+    def test_modify_client_with_wrong_sales_contact(self):
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
+
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        data = {'SalesContactID': 1}
+        response = self.client.patch(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_modify_client_as_support(self):
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-detail', kwargs = {'pk': 1})
         data = {'CompanyName': 'ModifCompanyName'}
@@ -267,59 +258,13 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_modify_client_as_sales_contact(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
-
-        url = reverse('clients-detail', kwargs = {'pk': 1})
-        data = {'CompanyName': 'ModifCompanyName'}
-        response = self.client.patch(url, data, format='json')
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["CompanyName"], "ModifCompanyName")
-
-    def test_modify_client_with_wrong_sales_contact(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
-
-        url = reverse('clients-detail', kwargs = {'pk': 1})
-        data = {'SalesContactID': 1}
-        response = self.client.patch(url, data, format='json')
-
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_modify_client_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
-
-        url = reverse('clients-detail', kwargs = {'pk': 1})
-        data = {'CompanyName': 'ModifCompanyName2'}
-        response = self.client.patch(url, data, format='json')
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["CompanyName"], "ModifCompanyName2")
-
-
 
     def test_modify_client_statut_as_management(self):
-        url = reverse('login')
-        data = {'username': 'StaffManagementA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -327,12 +272,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_client_statut_as_sales_contact(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -341,12 +282,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["ClientStatutID"], 1)
 
     def test_modify_client_statut_as_sales(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesB', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesB')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -354,12 +291,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_client_statut_as_support(self):
-        url = reverse('login')
-        data = {'username': 'StaffSupportA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
@@ -383,12 +316,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_modify_client_statut__already_actual(self):
-        url = reverse('login')
-        data = {'username': 'StaffSalesA', 'password': 'password'}
-        response = self.client.post(url, data, format='json')
-        token = response.data['access']
-
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
 
         url = reverse('clients-change-status', kwargs = {'pk': 3})
         response = self.client.post(url, format='json')

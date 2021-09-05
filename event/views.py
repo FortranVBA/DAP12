@@ -1,12 +1,13 @@
 """Project OC DAP 12 - Event view file."""
 
 from .serializers import EventSerializer
-from .models import Event
+from .models import Event, EventStatut
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
+from datetime import datetime
 
 # Create your views here.
 class NotAllowed(permissions.BasePermission):
@@ -65,3 +66,24 @@ class EventModelViewSet(viewsets.ModelViewSet):
             permission_classes = [NotAllowed]
 
         return [permission() for permission in permission_classes]
+
+    def list(self, request, *args, **kwargs):
+        """List all events."""
+        past_events = Event.objects.filter(EventDate__lt = datetime.now())
+
+        for event in past_events:
+            serializer = EventSerializer(event, data = {'EventStatutID': 1}, 
+            partial=True)
+            if serializer.is_valid():
+                serializer.save()
+
+        scheduled_events = Event.objects.filter(EventDate__gte = datetime.now())
+
+        for event in scheduled_events:
+            serializer = EventSerializer(event, data = {'EventStatutID': 2}, 
+            partial=True)
+            if serializer.is_valid():
+                serializer.save()
+
+        return super().list(request, args, kwargs)
+        
