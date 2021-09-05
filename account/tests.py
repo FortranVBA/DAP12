@@ -36,7 +36,7 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertIn("No active account found with the given credentials", 
         response.data['detail'])
-
+        
 
     def test_list_user_as_management(self):
         url = reverse('login')
