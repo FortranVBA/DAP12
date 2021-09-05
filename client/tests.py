@@ -131,13 +131,35 @@ class ClientTests(APITestCase):
             'Phone': '+33123456789',
             'Mobile': '+33623456789',
             'CompanyName': 'NewClient2',
-            'SalesContactID': 2,
+            'SalesContactID': 3,
             'ClientStatutID': 2
             }
         response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_add_client_with_wrong_sales_contact(self):
+        url = reverse('login')
+        data = {'username': 'StaffSalesA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('clients-list')
+        data = {
+            'FirstName': 'JohnD', 
+            'LastName': 'SmithD',
+            'Email': 'jsd@mail.com',
+            'Phone': '+33123456789',
+            'Mobile': '+33623456789',
+            'CompanyName': 'NewClient2',
+            'SalesContactID': 1,
+            'ClientStatutID': 2
+            }
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_add_client_as_support(self):
         url = reverse('login')

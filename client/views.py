@@ -31,7 +31,7 @@ class IsSale(permissions.BasePermission):
 class IsSaleContact(permissions.BasePermission):
     """Permission that denies all users."""
 
-    message = "You must be part of sales contact for this operation."
+    message = "You must be the sales contact for this operation."
 
     def has_permission(self, request, view):
         """Check the object permission."""
