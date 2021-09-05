@@ -282,6 +282,20 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["CompanyName"], "ModifCompanyName")
 
+    def test_modify_client_with_wrong_sales_contact(self):
+        url = reverse('login')
+        data = {'username': 'StaffSalesA', 'password': 'password'}
+        response = self.client.post(url, data, format='json')
+        token = response.data['access']
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        data = {'SalesContactID': 1}
+        response = self.client.patch(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_modify_client_as_management(self):
         url = reverse('login')
         data = {'username': 'StaffManagementA', 'password': 'password'}
