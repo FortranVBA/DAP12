@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import filters
 
 # Create your views here.
 class NotAllowed(permissions.BasePermission):
@@ -33,6 +34,8 @@ class StaffModelsViewSet(viewsets.ModelViewSet):
     """Projects viewset."""
 
     serializer_class = StaffSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username']
 
     def get_queryset(self):
         queryset = Staff.objects.all()

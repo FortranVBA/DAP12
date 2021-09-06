@@ -69,6 +69,26 @@ class EventTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_list_event_with_contact_filter(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)  
+
+        url = reverse('events-list')
+        response = self.client.get(url, {'contact': 5}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_list_event_with_statut_filter(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)  
+
+        url = reverse('events-list')
+        response = self.client.get(url, {'statut': 2}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
 
     def test_add_event_as_management(self):
         user = Staff.objects.get(username = 'StaffManagementA')

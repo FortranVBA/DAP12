@@ -85,6 +85,26 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_list_user_with_profile_filter(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
+
+        url = reverse('users-list')
+        response = self.client.get(url, {'profile': 3}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_list_user_with_search(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
+
+        url = reverse('users-list')
+        response = self.client.get(url, {'search': 'sales'}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
 
     def test_add_user_as_management(self):
         user = Staff.objects.get(username = 'StaffManagementA')

@@ -63,6 +63,26 @@ class ContractTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_list_contract_with_client_filter(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
+
+        url = reverse('contracts-list')
+        response = self.client.get(url, {'client': 3}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
+    def test_list_contract_with_statut_filter(self):
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
+
+        url = reverse('contracts-list')
+        response = self.client.get(url, {'statut': 2}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
 
     def test_add_contract_as_management(self):
         user = Staff.objects.get(username = 'StaffManagementA')

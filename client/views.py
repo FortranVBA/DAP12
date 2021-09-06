@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
+from rest_framework import filters
 
 # Create your views here.
 class NotAllowed(permissions.BasePermission):
@@ -63,6 +64,8 @@ class ClientModelViewSet(viewsets.ModelViewSet):
     """Client viewset."""
 
     serializer_class = ClientSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['CompanyName']
 
     def get_queryset(self):
         queryset = Client.objects.all()
