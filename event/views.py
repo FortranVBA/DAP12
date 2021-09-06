@@ -2,6 +2,7 @@
 
 from .serializers import EventSerializer
 from .models import Event, EventStatut
+from account.models import Staff
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -52,7 +53,20 @@ class EventModelViewSet(viewsets.ModelViewSet):
     """Event viewset."""
 
     serializer_class = EventSerializer
-    queryset = Event.objects.all()
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        StaffContactID = self.request.query_params.get('contact')
+        if StaffContactID is not None:
+            staff_contact = Staff.objects.get(pk = StaffContactID)
+            queryset = queryset.filter(SupportContactID = staff_contact)
+
+        StatutID = self.request.query_params.get('statut')
+        if StatutID is not None:
+            contract_statut = EventStatut.objects.get(pk = StatutID)
+            queryset = queryset.filter(EventStatutID = contract_statut)
+
+        return queryset
 
     def get_permissions(self):
         """Instantiate and returns the list of permissions that this view requires."""

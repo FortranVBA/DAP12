@@ -2,6 +2,7 @@
 
 from .serializers import ClientSerializer
 from .models import Client, ClientStatut
+from account.models import Staff
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -62,7 +63,20 @@ class ClientModelViewSet(viewsets.ModelViewSet):
     """Client viewset."""
 
     serializer_class = ClientSerializer
-    queryset = Client.objects.all()
+
+    def get_queryset(self):
+        queryset = Client.objects.all()
+        SalesContactID = self.request.query_params.get('contact')
+        if SalesContactID is not None:
+            sales_contact = Staff.objects.get(pk = SalesContactID)
+            queryset = queryset.filter(SalesContactID = sales_contact)
+
+        StatutID = self.request.query_params.get('statut')
+        if StatutID is not None:
+            client_statut = ClientStatut.objects.get(pk = StatutID)
+            queryset = queryset.filter(ClientStatutID = client_statut)
+
+        return queryset
 
     def get_permissions(self):
         """Instantiate and returns the list of permissions that this view requires."""

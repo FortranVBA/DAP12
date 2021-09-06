@@ -13,7 +13,7 @@ class StaffSerializer(serializers.ModelSerializer):
         """Serializer meta properties."""
 
         model = Staff
-        fields = ["id", "username", 'password', 'StaffProfileID', 'is_superuser']
+        fields = ["id", "username", 'StaffProfileID']
 
     def validate_password(self, value: str) -> str:
         """

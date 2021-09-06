@@ -1,7 +1,8 @@
 """Project OC DAP 12 - Contract view file."""
 
 from .serializers import ContractSerializer
-from .models import Contract
+from .models import Contract, ContractStatut
+from client.models import Client
 from event.serializers import EventSerializer
 from event.models import Event
 from rest_framework import viewsets
@@ -64,7 +65,20 @@ class ContractModelViewSet(viewsets.ModelViewSet):
     """Contract viewset."""
 
     serializer_class = ContractSerializer
-    queryset = Contract.objects.all()
+
+    def get_queryset(self):
+        queryset = Contract.objects.all()
+        ClientID = self.request.query_params.get('client')
+        if ClientID is not None:
+            client = Client.objects.get(pk = ClientID)
+            queryset = queryset.filter(ClientID = client)
+
+        StatutID = self.request.query_params.get('statut')
+        if StatutID is not None:
+            contract_statut = ContractStatut.objects.get(pk = StatutID)
+            queryset = queryset.filter(ContractStatutID = contract_statut)
+
+        return queryset
 
     def get_permissions(self):
         """Instantiate and returns the list of permissions that this view requires."""
