@@ -1,0 +1,6 @@
+Unauthorized: /login/
+"POST /login/ HTTP/1.1" 401 63
+WARNING 2021-09-06 10:52:28,105 Not Found: /user/
+WARNING 2021-09-06 10:52:28,106 "GET /user/ HTTP/1.1" 404 6253
+WARNING 2021-09-06 10:52:35,634 Unauthorized: /users/
+WARNING 2021-09-06 10:52:35,635 "GET /users/ HTTP/1.1" 401 183

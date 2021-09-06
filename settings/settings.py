@@ -147,3 +147,27 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
+
+LOGGING = {
+    'version': 1,
+    'loggers':{
+        'django':{
+            'handlers':['file'],
+            'level': 'WARNING'
+        }
+    },
+    'handlers':{
+        'file':{
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/logging.log',
+            'formatter':'simple'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        }
+    },
+}
