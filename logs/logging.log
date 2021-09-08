@@ -664,3 +664,5 @@ WARNING 2021-09-08 14:03:19,328 Forbidden: /events/1/
 WARNING 2021-09-08 14:03:19,338 Unauthorized: /events/1/
 WARNING 2021-09-08 14:03:19,343 Bad Request: /events/1/
 WARNING 2021-09-08 14:03:19,344 Unauthorized: /events/1/
+WARNING 2021-09-08 14:03:56,360 Unauthorized: /clients/
+WARNING 2021-09-08 14:03:56,361 "GET /clients/?search=Clien HTTP/1.1" 401 183
