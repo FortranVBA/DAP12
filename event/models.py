@@ -21,3 +21,6 @@ class Event(models.Model):
     Notes = models.TextField(max_length=8192, blank=True)
     SupportContactID = models.ForeignKey(to=Staff, on_delete=models.CASCADE)
     EventStatutID = models.ForeignKey(to=EventStatut, on_delete=models.CASCADE)
+
+    def get_staff_contact(self):
+        return [self.ContractID.ClientID.SalesContactID, self.SupportContactID]

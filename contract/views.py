@@ -2,6 +2,8 @@
 
 from .serializers import ContractSerializer
 from .models import Contract, ContractStatut
+from settings.permissions import IsSale, IsStaffContactOrManagement, IsStaffContact
+from settings.permissions import AllowedActionsContract
 from client.models import Client
 from event.serializers import EventSerializer
 from event.models import Event
@@ -13,59 +15,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 
 # Create your views here.
-class NotAllowed(permissions.BasePermission):
-    """Permission that denies all users."""
 
-    message = "This operation is not allowed."
-
-    def has_permission(self, request, view):
-        """Check the object permission."""
-        return False
-
-class IsSale(permissions.BasePermission):
-    """Permission that denies all users."""
-
-    message = "You must be part of sales team for this operation."
-
-    def has_permission(self, request, view):
-        """Check the object permission."""
-        return request.user.StaffProfileID.Name == "Vente"
-
-class IsSaleContact(permissions.BasePermission):
-    """Permission that denies all users."""
-
-    message = "You must be the sales contact for this operation."
-
-    def has_permission(self, request, view):
-        """Check the object permission."""
-        return request.user.StaffProfileID.Name == "Vente"
-
-    def has_object_permission(self, request, view, obj):
-        """Check the object permission."""
-        return request.user == obj.ClientID.SalesContactID
-
-class IsSalesContactOrManagement(permissions.BasePermission):
-    """Permission checking if user is a project contributor or author."""
-
-    message = "You must be the sales contact of this project or from management team."
-
-    def has_permission(self, request, view):
-        """Check the object permission."""
-        profile_name = request.user.StaffProfileID.Name
-        return (profile_name == "Vente") or (profile_name == "Gestion")
-
-    def has_object_permission(self, request, view, obj):
-        """Check the object permission."""
-        if request.user.StaffProfileID.Name == "Vente":
-            return request.user == obj.ClientID.SalesContactID
-
-        return True
 
 class ContractModelViewSet(viewsets.ModelViewSet):
     """Contract viewset."""
 
     serializer_class = ContractSerializer
-
+    permission_classes = [IsAuthenticated, IsSale, IsStaffContactOrManagement, 
+    IsStaffContact, AllowedActionsContract]
+ 
     def get_queryset(self):
         queryset = Contract.objects.all()
         ClientID = self.request.query_params.get('client')
@@ -80,21 +38,6 @@ class ContractModelViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    def get_permissions(self):
-        """Instantiate and returns the list of permissions that this view requires."""
-        if self.action in ["list", 'retrieve', 'events']:
-            permission_classes = [IsAuthenticated]
-        elif self.action in ["create"]:
-            permission_classes = [IsAuthenticated, IsSale]
-        elif self.action in ["partial_update"]:
-            permission_classes = [IsAuthenticated, IsSalesContactOrManagement]              
-        elif self.action in ["change_status"]:
-            permission_classes = [IsAuthenticated, IsSaleContact]              
-        else:
-            permission_classes = [NotAllowed]
-
-        return [permission() for permission in permission_classes]
-
     @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated])
     def events(self, request, pk=None):
         contract = Contract.objects.get(id = pk)
@@ -104,7 +47,7 @@ class ContractModelViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(methods=['post'], detail=True, permission_classes=[IsAuthenticated, 
-    IsSaleContact])
+    IsStaffContact])
     def change_status(self, request, pk=None):
         contract = Contract.objects.get(id = pk)
         self.check_object_permissions(request, contract)

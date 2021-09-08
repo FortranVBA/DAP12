@@ -18,3 +18,6 @@ class Contract(models.Model):
     Amount = models.FloatField()
     PaymentDue = models.DateTimeField()
     ContractStatutID = models.ForeignKey(to=ContractStatut, on_delete=models.CASCADE)
+
+    def get_staff_contact(self):
+        return [self.ClientID.SalesContactID]

@@ -1,506 +1,666 @@
-Unauthorized: /login/
-"POST /login/ HTTP/1.1" 401 63
-WARNING 2021-09-06 10:52:28,105 Not Found: /user/
-WARNING 2021-09-06 10:52:28,106 "GET /user/ HTTP/1.1" 404 6253
-WARNING 2021-09-06 10:52:35,634 Unauthorized: /users/
-WARNING 2021-09-06 10:52:35,635 "GET /users/ HTTP/1.1" 401 183
-WARNING 2021-09-06 11:04:08,181 Unauthorized: /users/
-WARNING 2021-09-06 11:04:08,182 "GET /users/ HTTP/1.1" 401 183
-WARNING 2021-09-06 11:05:04,414 Unauthorized: /users/
-WARNING 2021-09-06 11:05:04,414 "GET /users/?profileID=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:05:17,020 Unauthorized: /users/
-WARNING 2021-09-06 11:05:17,020 "GET /users/?profileID=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:05:43,571 Unauthorized: /users/
-WARNING 2021-09-06 11:05:43,571 "GET /users/?profileID=2 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:06:10,631 Unauthorized: /users/
-WARNING 2021-09-06 11:06:10,631 "GET /users/?profile=5 HTTP/1.1" 401 183
-ERROR 2021-09-06 11:06:14,715 Internal Server Error: /users/
-Traceback (most recent call last):
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
-    response = get_response(request)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
-    return view_func(*args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\viewsets.py", line 125, in view
-    return self.dispatch(request, *args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
-    response = self.handle_exception(exc)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
-    self.raise_uncaught_exception(exc)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
-    raise exc
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
-    response = handler(request, *args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\mixins.py", line 38, in list
-    queryset = self.filter_queryset(self.get_queryset())
-  File "D:\devapp\projetDAP12\account\views.py", line 41, in get_queryset
-    staff_profile = StaffProfile.objects.get(pk = profileID)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\db\models\query.py", line 437, in get
-    self.model._meta.object_name
-account.models.StaffProfile.DoesNotExist: StaffProfile matching query does not exist.
-ERROR 2021-09-06 11:06:14,718 "GET /users/?profile=5 HTTP/1.1" 500 110790
-WARNING 2021-09-06 11:06:37,468 Unauthorized: /users/
-WARNING 2021-09-06 11:06:37,469 "GET /users/?profile=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:08:28,548 Unauthorized: /users/
-WARNING 2021-09-06 11:08:28,549 "GET /users/?profile=6 HTTP/1.1" 401 183
-ERROR 2021-09-06 11:08:33,200 Internal Server Error: /users/
-Traceback (most recent call last):
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
-    response = get_response(request)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
-    return view_func(*args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\viewsets.py", line 125, in view
-    return self.dispatch(request, *args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
-    response = self.handle_exception(exc)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
-    self.raise_uncaught_exception(exc)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
-    raise exc
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
-    response = handler(request, *args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\rest_framework\mixins.py", line 38, in list
-    queryset = self.filter_queryset(self.get_queryset())
-  File "D:\devapp\projetDAP12\account\views.py", line 41, in get_queryset
-    staff_profile = StaffProfile.objects.get(pk = profileID)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-  File "D:\devapp\projetDAP12\.venv\lib\site-packages\django\db\models\query.py", line 437, in get
-    self.model._meta.object_name
-account.models.StaffProfile.DoesNotExist: StaffProfile matching query does not exist.
-ERROR 2021-09-06 11:08:33,202 "GET /users/?profile=6 HTTP/1.1" 500 110678
-WARNING 2021-09-06 11:15:39,695 Unauthorized: /clients/
-WARNING 2021-09-06 11:15:39,696 "GET /clients/?contact=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:15:49,510 Unauthorized: /clients/
-WARNING 2021-09-06 11:15:49,511 "GET /clients/?contact=2 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:15:56,786 Unauthorized: /clients/
-WARNING 2021-09-06 11:15:56,786 "GET /clients/ HTTP/1.1" 401 183
-WARNING 2021-09-06 11:16:13,460 Unauthorized: /clients/
-WARNING 2021-09-06 11:16:13,460 "GET /clients/?contact=13 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:16:36,384 Unauthorized: /clients/
-WARNING 2021-09-06 11:16:36,384 "GET /clients/?contact=13&statut=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:16:45,669 Unauthorized: /clients/
-WARNING 2021-09-06 11:16:45,669 "GET /clients/?contact=13&statut=2 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:25:07,966 Unauthorized: /contracts/
-WARNING 2021-09-06 11:25:07,966 "GET /contracts/ HTTP/1.1" 401 183
-WARNING 2021-09-06 11:25:47,081 Unauthorized: /contracts/
-WARNING 2021-09-06 11:25:47,081 "GET /contracts/ HTTP/1.1" 401 183
-WARNING 2021-09-06 11:26:08,379 Unauthorized: /contracts/
-WARNING 2021-09-06 11:26:08,380 "GET /contracts/?client=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:26:28,251 Unauthorized: /contracts/
-WARNING 2021-09-06 11:26:28,251 "GET /contracts/?statut=1 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:41:14,087 Unauthorized: /events/
-WARNING 2021-09-06 11:41:14,088 "GET /events/ HTTP/1.1" 401 183
-WARNING 2021-09-06 11:41:46,635 Unauthorized: /events/
-WARNING 2021-09-06 11:41:46,635 "GET /events/?contact=4 HTTP/1.1" 401 183
-WARNING 2021-09-06 11:42:09,698 Unauthorized: /events/
-WARNING 2021-09-06 11:42:09,698 "GET /events/?contact=4&statut=2 HTTP/1.1" 401 183
-WARNING 2021-09-06 13:32:07,336 Unauthorized: /users/
-WARNING 2021-09-06 13:32:07,336 "GET /users/?search=Support HTTP/1.1" 401 183
-WARNING 2021-09-06 13:32:21,031 Unauthorized: /users/
-WARNING 2021-09-06 13:32:21,032 "GET /users/?search=support HTTP/1.1" 401 183
-WARNING 2021-09-06 13:33:47,068 Unauthorized: /clients/
-WARNING 2021-09-06 13:33:47,069 "GET /clients/ HTTP/1.1" 401 183
-WARNING 2021-09-06 13:34:30,764 Unauthorized: /clients/
-WARNING 2021-09-06 13:34:30,764 "POST /clients/ HTTP/1.1" 401 183
-WARNING 2021-09-06 13:34:35,376 Forbidden: /clients/
-WARNING 2021-09-06 13:34:35,376 "POST /clients/ HTTP/1.1" 403 63
-WARNING 2021-09-06 13:34:48,906 Unauthorized: /clients/
-WARNING 2021-09-06 13:34:48,907 "GET /clients/?search=ClientA HTTP/1.1" 401 183
-WARNING 2021-09-06 13:34:59,260 Unauthorized: /clients/
-WARNING 2021-09-06 13:34:59,260 "GET /clients/?search=Clien HTTP/1.1" 401 183
-WARNING 2021-09-06 13:37:23,128 Forbidden: /users/
-WARNING 2021-09-06 13:37:23,131 Forbidden: /users/
-WARNING 2021-09-06 13:37:23,139 Unauthorized: /users/
-WARNING 2021-09-06 13:37:23,142 Unauthorized: /users/
-WARNING 2021-09-06 13:37:23,158 Forbidden: /users/2/
-WARNING 2021-09-06 13:37:23,160 Forbidden: /users/2/
-WARNING 2021-09-06 13:37:23,162 Unauthorized: /users/2/
-WARNING 2021-09-06 13:37:23,164 Unauthorized: /users/2/
-WARNING 2021-09-06 13:37:23,280 Unauthorized: /login/
-WARNING 2021-09-06 13:37:23,288 Forbidden: /users/
-WARNING 2021-09-06 13:37:23,291 Forbidden: /users/
-WARNING 2021-09-06 13:37:23,293 Unauthorized: /users/
-WARNING 2021-09-06 13:37:23,295 Unauthorized: /users/
-WARNING 2021-09-06 13:37:23,304 Forbidden: /users/2/
-WARNING 2021-09-06 13:37:23,306 Forbidden: /users/2/
-WARNING 2021-09-06 13:37:23,309 Unauthorized: /users/2/
-WARNING 2021-09-06 13:37:23,310 Unauthorized: /users/2/
-WARNING 2021-09-06 13:37:23,551 Forbidden: /clients/
-WARNING 2021-09-06 13:37:23,559 Forbidden: /clients/
-WARNING 2021-09-06 13:37:23,560 Unauthorized: /clients/
-WARNING 2021-09-06 13:37:23,565 Bad Request: /clients/
-WARNING 2021-09-06 13:37:23,566 Unauthorized: /clients/
-WARNING 2021-09-06 13:37:23,577 Unauthorized: /clients/
-WARNING 2021-09-06 13:37:23,579 Unauthorized: /clients/
-WARNING 2021-09-06 13:37:23,588 Forbidden: /clients/1/
-WARNING 2021-09-06 13:37:23,597 Forbidden: /clients/1/
-WARNING 2021-09-06 13:37:23,602 Bad Request: /clients/3/change_status/
-WARNING 2021-09-06 13:37:23,605 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:37:23,610 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:37:23,618 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:37:23,619 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:37:23,621 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:37:23,622 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:37:23,628 Bad Request: /clients/1/
-WARNING 2021-09-06 13:37:23,629 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:37:23,702 Forbidden: /contracts/
-WARNING 2021-09-06 13:37:23,709 Forbidden: /contracts/
-WARNING 2021-09-06 13:37:23,711 Unauthorized: /contracts/
-WARNING 2021-09-06 13:37:23,713 Unauthorized: /contracts/
-WARNING 2021-09-06 13:37:23,736 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:37:23,737 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:37:23,739 Unauthorized: /contracts/
-WARNING 2021-09-06 13:37:23,741 Unauthorized: /contracts/
-WARNING 2021-09-06 13:37:23,750 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:37:23,760 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:37:23,765 Bad Request: /contracts/3/change_status/
-WARNING 2021-09-06 13:37:23,767 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:37:23,771 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:37:23,803 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:37:23,805 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:37:23,807 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:37:23,809 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:37:23,811 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:37:23,883 Forbidden: /events/
-WARNING 2021-09-06 13:37:23,891 Forbidden: /events/
-WARNING 2021-09-06 13:37:23,893 Unauthorized: /events/
-WARNING 2021-09-06 13:37:23,898 Bad Request: /events/
-WARNING 2021-09-06 13:37:23,900 Unauthorized: /events/
-WARNING 2021-09-06 13:37:23,932 Unauthorized: /events/
-WARNING 2021-09-06 13:37:23,933 Unauthorized: /events/
-WARNING 2021-09-06 13:37:23,944 Forbidden: /events/1/
-WARNING 2021-09-06 13:37:23,956 Forbidden: /events/1/
-WARNING 2021-09-06 13:37:23,964 Unauthorized: /events/1/
-WARNING 2021-09-06 13:37:23,970 Bad Request: /events/1/
-WARNING 2021-09-06 13:37:23,972 Unauthorized: /events/1/
-WARNING 2021-09-06 13:45:56,520 Forbidden: /users/
-WARNING 2021-09-06 13:45:56,523 Forbidden: /users/
-WARNING 2021-09-06 13:45:56,531 Unauthorized: /users/
-WARNING 2021-09-06 13:45:56,533 Unauthorized: /users/
-WARNING 2021-09-06 13:45:56,544 Forbidden: /users/2/
-WARNING 2021-09-06 13:45:56,547 Forbidden: /users/2/
-WARNING 2021-09-06 13:45:56,550 Unauthorized: /users/2/
-WARNING 2021-09-06 13:45:56,552 Unauthorized: /users/2/
-WARNING 2021-09-06 13:45:56,667 Unauthorized: /login/
-WARNING 2021-09-06 13:45:56,674 Forbidden: /users/
-WARNING 2021-09-06 13:45:56,677 Forbidden: /users/
-WARNING 2021-09-06 13:45:56,678 Unauthorized: /users/
-WARNING 2021-09-06 13:45:56,685 Unauthorized: /users/
-WARNING 2021-09-06 13:45:56,694 Forbidden: /users/2/
-WARNING 2021-09-06 13:45:56,697 Forbidden: /users/2/
-WARNING 2021-09-06 13:45:56,698 Unauthorized: /users/2/
-WARNING 2021-09-06 13:45:56,700 Unauthorized: /users/2/
-WARNING 2021-09-06 13:45:56,943 Forbidden: /clients/
-WARNING 2021-09-06 13:45:56,951 Forbidden: /clients/
-WARNING 2021-09-06 13:45:56,952 Unauthorized: /clients/
-WARNING 2021-09-06 13:45:56,957 Bad Request: /clients/
-WARNING 2021-09-06 13:45:56,958 Unauthorized: /clients/
-WARNING 2021-09-06 13:45:56,970 Unauthorized: /clients/
-WARNING 2021-09-06 13:45:56,972 Unauthorized: /clients/
-WARNING 2021-09-06 13:45:56,980 Forbidden: /clients/1/
-WARNING 2021-09-06 13:45:56,987 Forbidden: /clients/1/
-WARNING 2021-09-06 13:45:56,991 Bad Request: /clients/3/change_status/
-WARNING 2021-09-06 13:45:56,994 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:45:56,999 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:45:57,007 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:45:57,009 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:45:57,010 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:45:57,012 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:45:57,018 Bad Request: /clients/1/
-WARNING 2021-09-06 13:45:57,020 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:45:57,094 Forbidden: /contracts/
-WARNING 2021-09-06 13:45:57,101 Forbidden: /contracts/
-WARNING 2021-09-06 13:45:57,103 Unauthorized: /contracts/
-WARNING 2021-09-06 13:45:57,104 Unauthorized: /contracts/
-WARNING 2021-09-06 13:45:57,126 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:45:57,128 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:45:57,130 Unauthorized: /contracts/
-WARNING 2021-09-06 13:45:57,132 Unauthorized: /contracts/
-WARNING 2021-09-06 13:45:57,162 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:45:57,170 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:45:57,175 Bad Request: /contracts/3/change_status/
-WARNING 2021-09-06 13:45:57,177 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:45:57,181 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:45:57,191 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:45:57,193 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:45:57,194 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:45:57,196 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:45:57,197 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:45:57,268 Forbidden: /events/
-WARNING 2021-09-06 13:45:57,276 Forbidden: /events/
-WARNING 2021-09-06 13:45:57,279 Unauthorized: /events/
-WARNING 2021-09-06 13:45:57,284 Bad Request: /events/
-WARNING 2021-09-06 13:45:57,287 Unauthorized: /events/
-WARNING 2021-09-06 13:45:57,315 Unauthorized: /events/
-WARNING 2021-09-06 13:45:57,317 Unauthorized: /events/
-WARNING 2021-09-06 13:45:57,326 Forbidden: /events/1/
-WARNING 2021-09-06 13:45:57,337 Forbidden: /events/1/
-WARNING 2021-09-06 13:45:57,345 Unauthorized: /events/1/
-WARNING 2021-09-06 13:45:57,350 Bad Request: /events/1/
-WARNING 2021-09-06 13:45:57,352 Unauthorized: /events/1/
-WARNING 2021-09-06 13:47:59,722 Forbidden: /users/
-WARNING 2021-09-06 13:47:59,725 Forbidden: /users/
-WARNING 2021-09-06 13:47:59,734 Unauthorized: /users/
-WARNING 2021-09-06 13:47:59,737 Unauthorized: /users/
-WARNING 2021-09-06 13:47:59,750 Forbidden: /users/2/
-WARNING 2021-09-06 13:47:59,753 Forbidden: /users/2/
-WARNING 2021-09-06 13:47:59,756 Unauthorized: /users/2/
-WARNING 2021-09-06 13:47:59,758 Unauthorized: /users/2/
-WARNING 2021-09-06 13:47:59,874 Unauthorized: /login/
-WARNING 2021-09-06 13:47:59,882 Forbidden: /users/
-WARNING 2021-09-06 13:47:59,886 Forbidden: /users/
-WARNING 2021-09-06 13:47:59,888 Unauthorized: /users/
-WARNING 2021-09-06 13:47:59,898 Unauthorized: /users/
-WARNING 2021-09-06 13:47:59,906 Forbidden: /users/2/
-WARNING 2021-09-06 13:47:59,909 Forbidden: /users/2/
-WARNING 2021-09-06 13:47:59,910 Unauthorized: /users/2/
-WARNING 2021-09-06 13:47:59,912 Unauthorized: /users/2/
-WARNING 2021-09-06 13:48:00,154 Forbidden: /clients/
-WARNING 2021-09-06 13:48:00,163 Forbidden: /clients/
-WARNING 2021-09-06 13:48:00,165 Unauthorized: /clients/
-WARNING 2021-09-06 13:48:00,169 Bad Request: /clients/
-WARNING 2021-09-06 13:48:00,171 Unauthorized: /clients/
-WARNING 2021-09-06 13:48:00,183 Unauthorized: /clients/
-WARNING 2021-09-06 13:48:00,185 Unauthorized: /clients/
-WARNING 2021-09-06 13:48:00,194 Forbidden: /clients/1/
-WARNING 2021-09-06 13:48:00,203 Forbidden: /clients/1/
-WARNING 2021-09-06 13:48:00,208 Bad Request: /clients/3/change_status/
-WARNING 2021-09-06 13:48:00,212 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:48:00,215 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:48:00,225 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:48:00,227 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:48:00,229 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:48:00,231 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:48:00,237 Bad Request: /clients/1/
-WARNING 2021-09-06 13:48:00,238 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:48:00,314 Forbidden: /contracts/
-WARNING 2021-09-06 13:48:00,323 Forbidden: /contracts/
-WARNING 2021-09-06 13:48:00,326 Unauthorized: /contracts/
-WARNING 2021-09-06 13:48:00,327 Unauthorized: /contracts/
-WARNING 2021-09-06 13:48:00,351 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:48:00,353 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:48:00,354 Unauthorized: /contracts/
-WARNING 2021-09-06 13:48:00,357 Unauthorized: /contracts/
-WARNING 2021-09-06 13:48:00,367 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:48:00,394 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:48:00,399 Bad Request: /contracts/3/change_status/
-WARNING 2021-09-06 13:48:00,402 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:48:00,407 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:48:00,416 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:48:00,418 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:48:00,420 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:48:00,423 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:48:00,425 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:48:00,496 Forbidden: /events/
-WARNING 2021-09-06 13:48:00,505 Forbidden: /events/
-WARNING 2021-09-06 13:48:00,507 Unauthorized: /events/
-WARNING 2021-09-06 13:48:00,513 Bad Request: /events/
-WARNING 2021-09-06 13:48:00,515 Unauthorized: /events/
-WARNING 2021-09-06 13:48:00,544 Unauthorized: /events/
-WARNING 2021-09-06 13:48:00,546 Unauthorized: /events/
-WARNING 2021-09-06 13:48:00,555 Forbidden: /events/1/
-WARNING 2021-09-06 13:48:00,566 Forbidden: /events/1/
-WARNING 2021-09-06 13:48:00,574 Unauthorized: /events/1/
-WARNING 2021-09-06 13:48:00,580 Bad Request: /events/1/
-WARNING 2021-09-06 13:48:00,582 Unauthorized: /events/1/
-WARNING 2021-09-06 13:52:46,476 Forbidden: /users/
-WARNING 2021-09-06 13:52:46,479 Forbidden: /users/
-WARNING 2021-09-06 13:52:46,488 Unauthorized: /users/
-WARNING 2021-09-06 13:52:46,490 Unauthorized: /users/
-WARNING 2021-09-06 13:52:46,504 Forbidden: /users/2/
-WARNING 2021-09-06 13:52:46,507 Forbidden: /users/2/
-WARNING 2021-09-06 13:52:46,508 Unauthorized: /users/2/
-WARNING 2021-09-06 13:52:46,510 Unauthorized: /users/2/
-WARNING 2021-09-06 13:52:46,626 Unauthorized: /login/
-WARNING 2021-09-06 13:52:46,634 Forbidden: /users/
-WARNING 2021-09-06 13:52:46,638 Forbidden: /users/
-WARNING 2021-09-06 13:52:46,640 Unauthorized: /users/
-WARNING 2021-09-06 13:52:46,649 Unauthorized: /users/
-WARNING 2021-09-06 13:52:46,658 Forbidden: /users/2/
-WARNING 2021-09-06 13:52:46,661 Forbidden: /users/2/
-WARNING 2021-09-06 13:52:46,664 Unauthorized: /users/2/
-WARNING 2021-09-06 13:52:46,666 Unauthorized: /users/2/
-WARNING 2021-09-06 13:52:46,911 Forbidden: /clients/
-WARNING 2021-09-06 13:52:46,920 Forbidden: /clients/
-WARNING 2021-09-06 13:52:46,922 Unauthorized: /clients/
-WARNING 2021-09-06 13:52:46,926 Bad Request: /clients/
-WARNING 2021-09-06 13:52:46,928 Unauthorized: /clients/
-WARNING 2021-09-06 13:52:46,945 Unauthorized: /clients/
-WARNING 2021-09-06 13:52:46,954 Unauthorized: /clients/
-WARNING 2021-09-06 13:52:46,962 Forbidden: /clients/1/
-WARNING 2021-09-06 13:52:46,970 Forbidden: /clients/1/
-WARNING 2021-09-06 13:52:46,975 Bad Request: /clients/3/change_status/
-WARNING 2021-09-06 13:52:46,979 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:52:46,983 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:52:46,991 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:52:46,993 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:52:46,994 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:52:46,997 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:52:47,004 Bad Request: /clients/1/
-WARNING 2021-09-06 13:52:47,005 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:52:47,082 Forbidden: /contracts/
-WARNING 2021-09-06 13:52:47,089 Forbidden: /contracts/
-WARNING 2021-09-06 13:52:47,091 Unauthorized: /contracts/
-WARNING 2021-09-06 13:52:47,094 Unauthorized: /contracts/
-WARNING 2021-09-06 13:52:47,119 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:52:47,121 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:52:47,123 Unauthorized: /contracts/
-WARNING 2021-09-06 13:52:47,125 Unauthorized: /contracts/
-WARNING 2021-09-06 13:52:47,155 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:52:47,165 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:52:47,170 Bad Request: /contracts/3/change_status/
-WARNING 2021-09-06 13:52:47,173 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:52:47,177 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:52:47,185 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:52:47,188 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:52:47,189 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:52:47,191 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:52:47,193 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:52:47,265 Forbidden: /events/
-WARNING 2021-09-06 13:52:47,274 Forbidden: /events/
-WARNING 2021-09-06 13:52:47,276 Unauthorized: /events/
-WARNING 2021-09-06 13:52:47,283 Bad Request: /events/
-WARNING 2021-09-06 13:52:47,286 Unauthorized: /events/
-WARNING 2021-09-06 13:52:47,319 Unauthorized: /events/
-WARNING 2021-09-06 13:52:47,320 Unauthorized: /events/
-WARNING 2021-09-06 13:52:47,329 Forbidden: /events/1/
-WARNING 2021-09-06 13:52:47,341 Forbidden: /events/1/
-WARNING 2021-09-06 13:52:47,348 Unauthorized: /events/1/
-WARNING 2021-09-06 13:52:47,354 Bad Request: /events/1/
-WARNING 2021-09-06 13:52:47,356 Unauthorized: /events/1/
-WARNING 2021-09-06 13:56:16,321 Forbidden: /users/
-WARNING 2021-09-06 13:56:16,324 Forbidden: /users/
-WARNING 2021-09-06 13:56:16,333 Unauthorized: /users/
-WARNING 2021-09-06 13:56:16,336 Unauthorized: /users/
-WARNING 2021-09-06 13:56:16,349 Forbidden: /users/2/
-WARNING 2021-09-06 13:56:16,352 Forbidden: /users/2/
-WARNING 2021-09-06 13:56:16,354 Unauthorized: /users/2/
-WARNING 2021-09-06 13:56:16,357 Unauthorized: /users/2/
-WARNING 2021-09-06 13:56:16,475 Unauthorized: /login/
-WARNING 2021-09-06 13:56:16,483 Forbidden: /users/
-WARNING 2021-09-06 13:56:16,486 Forbidden: /users/
-WARNING 2021-09-06 13:56:16,488 Unauthorized: /users/
-WARNING 2021-09-06 13:56:16,500 Unauthorized: /users/
-WARNING 2021-09-06 13:56:16,509 Forbidden: /users/2/
-WARNING 2021-09-06 13:56:16,512 Forbidden: /users/2/
-WARNING 2021-09-06 13:56:16,514 Unauthorized: /users/2/
-WARNING 2021-09-06 13:56:16,516 Unauthorized: /users/2/
-WARNING 2021-09-06 13:56:16,774 Forbidden: /clients/
-WARNING 2021-09-06 13:56:16,784 Forbidden: /clients/
-WARNING 2021-09-06 13:56:16,786 Unauthorized: /clients/
-WARNING 2021-09-06 13:56:16,791 Bad Request: /clients/
-WARNING 2021-09-06 13:56:16,794 Unauthorized: /clients/
-WARNING 2021-09-06 13:56:16,813 Unauthorized: /clients/
-WARNING 2021-09-06 13:56:16,823 Unauthorized: /clients/
-WARNING 2021-09-06 13:56:16,831 Forbidden: /clients/1/
-WARNING 2021-09-06 13:56:16,838 Forbidden: /clients/1/
-WARNING 2021-09-06 13:56:16,843 Bad Request: /clients/3/change_status/
-WARNING 2021-09-06 13:56:16,847 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:56:16,850 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:56:16,859 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:56:16,861 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:56:16,863 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:56:16,865 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:56:16,871 Bad Request: /clients/1/
-WARNING 2021-09-06 13:56:16,874 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:56:16,954 Forbidden: /contracts/
-WARNING 2021-09-06 13:56:16,963 Forbidden: /contracts/
-WARNING 2021-09-06 13:56:16,966 Unauthorized: /contracts/
-WARNING 2021-09-06 13:56:16,968 Unauthorized: /contracts/
-WARNING 2021-09-06 13:56:16,997 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:56:16,999 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:56:17,024 Unauthorized: /contracts/
-WARNING 2021-09-06 13:56:17,030 Unauthorized: /contracts/
-WARNING 2021-09-06 13:56:17,041 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:56:17,049 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:56:17,053 Bad Request: /contracts/3/change_status/
-WARNING 2021-09-06 13:56:17,057 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:56:17,062 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:56:17,071 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:56:17,073 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:56:17,074 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:56:17,076 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:56:17,077 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:56:17,147 Forbidden: /events/
-WARNING 2021-09-06 13:56:17,159 Forbidden: /events/
-WARNING 2021-09-06 13:56:17,160 Unauthorized: /events/
-WARNING 2021-09-06 13:56:17,166 Bad Request: /events/
-WARNING 2021-09-06 13:56:17,167 Unauthorized: /events/
-WARNING 2021-09-06 13:56:17,203 Unauthorized: /events/
-WARNING 2021-09-06 13:56:17,205 Unauthorized: /events/
-WARNING 2021-09-06 13:56:17,216 Forbidden: /events/1/
-WARNING 2021-09-06 13:56:17,227 Forbidden: /events/1/
-WARNING 2021-09-06 13:56:17,235 Unauthorized: /events/1/
-WARNING 2021-09-06 13:56:17,240 Bad Request: /events/1/
-WARNING 2021-09-06 13:56:17,242 Unauthorized: /events/1/
-WARNING 2021-09-06 13:58:56,351 Forbidden: /users/
-WARNING 2021-09-06 13:58:56,355 Forbidden: /users/
-WARNING 2021-09-06 13:58:56,364 Unauthorized: /users/
-WARNING 2021-09-06 13:58:56,366 Unauthorized: /users/
-WARNING 2021-09-06 13:58:56,379 Forbidden: /users/2/
-WARNING 2021-09-06 13:58:56,382 Forbidden: /users/2/
-WARNING 2021-09-06 13:58:56,384 Unauthorized: /users/2/
-WARNING 2021-09-06 13:58:56,386 Unauthorized: /users/2/
-WARNING 2021-09-06 13:58:56,504 Unauthorized: /login/
-WARNING 2021-09-06 13:58:56,511 Forbidden: /users/
-WARNING 2021-09-06 13:58:56,514 Forbidden: /users/
-WARNING 2021-09-06 13:58:56,515 Unauthorized: /users/
-WARNING 2021-09-06 13:58:56,526 Unauthorized: /users/
-WARNING 2021-09-06 13:58:56,535 Forbidden: /users/2/
-WARNING 2021-09-06 13:58:56,538 Forbidden: /users/2/
-WARNING 2021-09-06 13:58:56,539 Unauthorized: /users/2/
-WARNING 2021-09-06 13:58:56,541 Unauthorized: /users/2/
-WARNING 2021-09-06 13:58:56,780 Forbidden: /clients/
-WARNING 2021-09-06 13:58:56,788 Forbidden: /clients/
-WARNING 2021-09-06 13:58:56,790 Unauthorized: /clients/
-WARNING 2021-09-06 13:58:56,794 Bad Request: /clients/
-WARNING 2021-09-06 13:58:56,796 Unauthorized: /clients/
-WARNING 2021-09-06 13:58:56,813 Unauthorized: /clients/
-WARNING 2021-09-06 13:58:56,822 Unauthorized: /clients/
-WARNING 2021-09-06 13:58:56,831 Forbidden: /clients/1/
-WARNING 2021-09-06 13:58:56,839 Forbidden: /clients/1/
-WARNING 2021-09-06 13:58:56,843 Bad Request: /clients/3/change_status/
-WARNING 2021-09-06 13:58:56,846 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:58:56,850 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:58:56,860 Forbidden: /clients/1/change_status/
-WARNING 2021-09-06 13:58:56,862 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:58:56,864 Unauthorized: /clients/1/change_status/
-WARNING 2021-09-06 13:58:56,865 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:58:56,872 Bad Request: /clients/1/
-WARNING 2021-09-06 13:58:56,875 Unauthorized: /clients/1/
-WARNING 2021-09-06 13:58:56,951 Forbidden: /contracts/
-WARNING 2021-09-06 13:58:56,958 Forbidden: /contracts/
-WARNING 2021-09-06 13:58:56,960 Unauthorized: /contracts/
-WARNING 2021-09-06 13:58:56,962 Unauthorized: /contracts/
-WARNING 2021-09-06 13:58:56,986 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:58:56,988 Unauthorized: /contracts/1/events/
-WARNING 2021-09-06 13:58:57,012 Unauthorized: /contracts/
-WARNING 2021-09-06 13:58:57,018 Unauthorized: /contracts/
-WARNING 2021-09-06 13:58:57,028 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:58:57,037 Forbidden: /contracts/1/
-WARNING 2021-09-06 13:58:57,042 Bad Request: /contracts/3/change_status/
-WARNING 2021-09-06 13:58:57,045 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:58:57,049 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:58:57,059 Forbidden: /contracts/1/change_status/
-WARNING 2021-09-06 13:58:57,061 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:58:57,063 Unauthorized: /contracts/1/change_status/
-WARNING 2021-09-06 13:58:57,065 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:58:57,067 Unauthorized: /contracts/1/
-WARNING 2021-09-06 13:58:57,136 Forbidden: /events/
-WARNING 2021-09-06 13:58:57,145 Forbidden: /events/
-WARNING 2021-09-06 13:58:57,147 Unauthorized: /events/
-WARNING 2021-09-06 13:58:57,152 Bad Request: /events/
-WARNING 2021-09-06 13:58:57,154 Unauthorized: /events/
-WARNING 2021-09-06 13:58:57,200 Unauthorized: /events/
-WARNING 2021-09-06 13:58:57,214 Unauthorized: /events/
-WARNING 2021-09-06 13:58:57,226 Forbidden: /events/1/
-WARNING 2021-09-06 13:58:57,237 Forbidden: /events/1/
-WARNING 2021-09-06 13:58:57,244 Unauthorized: /events/1/
-WARNING 2021-09-06 13:58:57,249 Bad Request: /events/1/
-WARNING 2021-09-06 13:58:57,251 Unauthorized: /events/1/
+WARNING 2021-09-08 10:33:56,071 Forbidden: /users/
+WARNING 2021-09-08 10:33:56,075 Forbidden: /users/
+WARNING 2021-09-08 10:33:56,083 Unauthorized: /users/
+WARNING 2021-09-08 10:33:56,086 Unauthorized: /users/
+WARNING 2021-09-08 10:33:56,099 Forbidden: /users/2/
+WARNING 2021-09-08 10:33:56,103 Forbidden: /users/2/
+WARNING 2021-09-08 10:33:56,105 Unauthorized: /users/2/
+WARNING 2021-09-08 10:33:56,106 Unauthorized: /users/2/
+WARNING 2021-09-08 10:33:56,223 Unauthorized: /login/
+WARNING 2021-09-08 10:33:56,230 Forbidden: /users/
+WARNING 2021-09-08 10:33:56,234 Forbidden: /users/
+WARNING 2021-09-08 10:33:56,236 Unauthorized: /users/
+WARNING 2021-09-08 10:33:56,246 Unauthorized: /users/
+WARNING 2021-09-08 10:33:56,254 Forbidden: /users/2/
+WARNING 2021-09-08 10:33:56,257 Forbidden: /users/2/
+WARNING 2021-09-08 10:33:56,259 Unauthorized: /users/2/
+WARNING 2021-09-08 10:33:56,260 Unauthorized: /users/2/
+WARNING 2021-09-08 10:33:56,508 Forbidden: /clients/
+WARNING 2021-09-08 10:33:56,516 Forbidden: /clients/
+WARNING 2021-09-08 10:33:56,518 Unauthorized: /clients/
+WARNING 2021-09-08 10:33:56,523 Bad Request: /clients/
+WARNING 2021-09-08 10:33:56,525 Unauthorized: /clients/
+WARNING 2021-09-08 10:33:56,540 Unauthorized: /clients/
+WARNING 2021-09-08 10:33:56,552 Unauthorized: /clients/
+WARNING 2021-09-08 10:33:56,561 Forbidden: /clients/1/
+WARNING 2021-09-08 10:33:56,569 Forbidden: /clients/1/
+WARNING 2021-09-08 10:33:56,575 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 10:33:56,578 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 10:33:56,582 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 10:33:56,591 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 10:33:56,592 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 10:33:56,594 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 10:33:56,596 Unauthorized: /clients/1/
+WARNING 2021-09-08 10:33:56,601 Bad Request: /clients/1/
+WARNING 2021-09-08 10:33:56,603 Unauthorized: /clients/1/
+WARNING 2021-09-08 10:33:56,677 Forbidden: /contracts/
+WARNING 2021-09-08 10:33:56,684 Forbidden: /contracts/
+WARNING 2021-09-08 10:33:56,686 Unauthorized: /contracts/
+WARNING 2021-09-08 10:33:56,688 Unauthorized: /contracts/
+WARNING 2021-09-08 10:33:56,712 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 10:33:56,714 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 10:33:56,738 Unauthorized: /contracts/
+WARNING 2021-09-08 10:33:56,744 Unauthorized: /contracts/
+WARNING 2021-09-08 10:33:56,754 Forbidden: /contracts/1/
+WARNING 2021-09-08 10:33:56,763 Forbidden: /contracts/1/
+WARNING 2021-09-08 10:33:56,769 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 10:33:56,772 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 10:33:56,776 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 10:33:56,785 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 10:33:56,787 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 10:33:56,789 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 10:33:56,791 Unauthorized: /contracts/1/
+WARNING 2021-09-08 10:33:56,793 Unauthorized: /contracts/1/
+WARNING 2021-09-08 10:33:56,863 Forbidden: /events/
+WARNING 2021-09-08 10:33:56,872 Forbidden: /events/
+WARNING 2021-09-08 10:33:56,874 Unauthorized: /events/
+WARNING 2021-09-08 10:33:56,879 Bad Request: /events/
+WARNING 2021-09-08 10:33:56,881 Unauthorized: /events/
+WARNING 2021-09-08 10:33:56,922 Unauthorized: /events/
+WARNING 2021-09-08 10:33:56,936 Unauthorized: /events/
+WARNING 2021-09-08 10:33:56,948 Forbidden: /events/1/
+WARNING 2021-09-08 10:33:56,960 Forbidden: /events/1/
+WARNING 2021-09-08 10:33:56,970 Unauthorized: /events/1/
+WARNING 2021-09-08 10:33:56,975 Bad Request: /events/1/
+WARNING 2021-09-08 10:33:56,977 Unauthorized: /events/1/
+WARNING 2021-09-08 11:47:07,632 Forbidden: /users/
+WARNING 2021-09-08 11:47:07,634 Forbidden: /users/
+WARNING 2021-09-08 11:47:07,641 Unauthorized: /users/
+WARNING 2021-09-08 11:47:07,643 Unauthorized: /users/
+WARNING 2021-09-08 11:47:07,655 Forbidden: /users/2/
+WARNING 2021-09-08 11:47:07,658 Forbidden: /users/2/
+WARNING 2021-09-08 11:47:07,660 Unauthorized: /users/2/
+WARNING 2021-09-08 11:47:07,662 Unauthorized: /users/2/
+WARNING 2021-09-08 11:47:07,777 Unauthorized: /login/
+WARNING 2021-09-08 11:47:07,784 Forbidden: /users/
+WARNING 2021-09-08 11:47:07,786 Forbidden: /users/
+WARNING 2021-09-08 11:47:07,788 Unauthorized: /users/
+WARNING 2021-09-08 11:47:07,798 Unauthorized: /users/
+WARNING 2021-09-08 11:47:07,807 Forbidden: /users/2/
+WARNING 2021-09-08 11:47:07,810 Forbidden: /users/2/
+WARNING 2021-09-08 11:47:07,811 Unauthorized: /users/2/
+WARNING 2021-09-08 11:47:07,813 Unauthorized: /users/2/
+WARNING 2021-09-08 11:47:08,054 Forbidden: /clients/
+WARNING 2021-09-08 11:47:08,062 Forbidden: /clients/
+WARNING 2021-09-08 11:47:08,064 Unauthorized: /clients/
+WARNING 2021-09-08 11:47:08,069 Bad Request: /clients/
+WARNING 2021-09-08 11:47:08,071 Unauthorized: /clients/
+WARNING 2021-09-08 11:47:08,089 Unauthorized: /clients/
+WARNING 2021-09-08 11:47:08,098 Unauthorized: /clients/
+WARNING 2021-09-08 11:47:08,102 Forbidden: /clients/1/
+WARNING 2021-09-08 11:47:08,130 Forbidden: /clients/1/
+WARNING 2021-09-08 11:47:08,138 Forbidden: /clients/1/
+WARNING 2021-09-08 11:47:08,143 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 11:47:08,146 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 11:47:08,151 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 11:47:08,160 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 11:47:08,162 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 11:47:08,164 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 11:47:08,165 Unauthorized: /clients/1/
+WARNING 2021-09-08 11:47:08,171 Bad Request: /clients/1/
+WARNING 2021-09-08 11:47:08,174 Unauthorized: /clients/1/
+WARNING 2021-09-08 11:47:08,179 Forbidden: /clients/1/
+WARNING 2021-09-08 11:47:08,250 Forbidden: /contracts/
+WARNING 2021-09-08 11:47:08,258 Forbidden: /contracts/
+WARNING 2021-09-08 11:47:08,260 Unauthorized: /contracts/
+WARNING 2021-09-08 11:47:08,261 Unauthorized: /contracts/
+WARNING 2021-09-08 11:47:08,286 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 11:47:08,288 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 11:47:08,294 Unauthorized: /contracts/
+WARNING 2021-09-08 11:47:08,319 Unauthorized: /contracts/
+WARNING 2021-09-08 11:47:08,328 Forbidden: /contracts/1/
+WARNING 2021-09-08 11:47:08,336 Forbidden: /contracts/1/
+WARNING 2021-09-08 11:47:08,341 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 11:47:08,345 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 11:47:08,350 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 11:47:08,359 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 11:47:08,361 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 11:47:08,364 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 11:47:08,366 Unauthorized: /contracts/1/
+WARNING 2021-09-08 11:47:08,368 Unauthorized: /contracts/1/
+WARNING 2021-09-08 11:47:08,437 Forbidden: /events/
+WARNING 2021-09-08 11:47:08,445 Forbidden: /events/
+WARNING 2021-09-08 11:47:08,448 Unauthorized: /events/
+WARNING 2021-09-08 11:47:08,453 Bad Request: /events/
+WARNING 2021-09-08 11:47:08,455 Unauthorized: /events/
+WARNING 2021-09-08 11:47:08,499 Unauthorized: /events/
+WARNING 2021-09-08 11:47:08,512 Unauthorized: /events/
+WARNING 2021-09-08 11:47:08,521 Forbidden: /events/1/
+WARNING 2021-09-08 11:47:08,532 Forbidden: /events/1/
+WARNING 2021-09-08 11:47:08,540 Unauthorized: /events/1/
+WARNING 2021-09-08 11:47:08,546 Bad Request: /events/1/
+WARNING 2021-09-08 11:47:08,548 Unauthorized: /events/1/
+WARNING 2021-09-08 11:50:02,220 Unauthorized: /clients/3/
+WARNING 2021-09-08 11:50:02,221 "GET /clients/3/ HTTP/1.1" 401 183
+WARNING 2021-09-08 11:50:07,008 Forbidden: /clients/3/
+WARNING 2021-09-08 11:50:07,008 "GET /clients/3/ HTTP/1.1" 403 62
+WARNING 2021-09-08 11:53:37,926 Forbidden: /users/
+WARNING 2021-09-08 11:53:37,930 Forbidden: /users/
+WARNING 2021-09-08 11:53:37,937 Unauthorized: /users/
+WARNING 2021-09-08 11:53:37,939 Unauthorized: /users/
+WARNING 2021-09-08 11:53:37,951 Forbidden: /users/2/
+WARNING 2021-09-08 11:53:37,955 Forbidden: /users/2/
+WARNING 2021-09-08 11:53:37,957 Unauthorized: /users/2/
+WARNING 2021-09-08 11:53:37,958 Unauthorized: /users/2/
+WARNING 2021-09-08 11:53:38,073 Unauthorized: /login/
+WARNING 2021-09-08 11:53:38,080 Forbidden: /users/
+WARNING 2021-09-08 11:53:38,083 Forbidden: /users/
+WARNING 2021-09-08 11:53:38,085 Unauthorized: /users/
+WARNING 2021-09-08 11:53:38,097 Unauthorized: /users/
+WARNING 2021-09-08 11:53:38,106 Forbidden: /users/2/
+WARNING 2021-09-08 11:53:38,109 Forbidden: /users/2/
+WARNING 2021-09-08 11:53:38,111 Unauthorized: /users/2/
+WARNING 2021-09-08 11:53:38,113 Unauthorized: /users/2/
+WARNING 2021-09-08 11:53:38,363 Forbidden: /clients/
+WARNING 2021-09-08 11:53:38,373 Forbidden: /clients/
+WARNING 2021-09-08 11:53:38,375 Unauthorized: /clients/
+WARNING 2021-09-08 11:53:38,380 Bad Request: /clients/
+WARNING 2021-09-08 11:53:38,381 Unauthorized: /clients/
+WARNING 2021-09-08 11:53:38,399 Unauthorized: /clients/
+WARNING 2021-09-08 11:53:38,408 Unauthorized: /clients/
+WARNING 2021-09-08 11:53:38,417 Forbidden: /clients/1/
+WARNING 2021-09-08 11:53:38,425 Forbidden: /clients/1/
+WARNING 2021-09-08 11:53:38,430 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 11:53:38,434 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 11:53:38,438 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 11:53:38,447 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 11:53:38,449 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 11:53:38,450 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 11:53:38,452 Unauthorized: /clients/1/
+WARNING 2021-09-08 11:53:38,458 Bad Request: /clients/1/
+WARNING 2021-09-08 11:53:38,460 Unauthorized: /clients/1/
+WARNING 2021-09-08 11:53:38,533 Forbidden: /contracts/
+WARNING 2021-09-08 11:53:38,541 Forbidden: /contracts/
+WARNING 2021-09-08 11:53:38,542 Unauthorized: /contracts/
+WARNING 2021-09-08 11:53:38,544 Unauthorized: /contracts/
+WARNING 2021-09-08 11:53:38,572 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 11:53:38,574 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 11:53:38,601 Unauthorized: /contracts/
+WARNING 2021-09-08 11:53:38,608 Unauthorized: /contracts/
+WARNING 2021-09-08 11:53:38,619 Forbidden: /contracts/1/
+WARNING 2021-09-08 11:53:38,627 Forbidden: /contracts/1/
+WARNING 2021-09-08 11:53:38,632 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 11:53:38,635 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 11:53:38,639 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 11:53:38,649 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 11:53:38,651 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 11:53:38,653 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 11:53:38,655 Unauthorized: /contracts/1/
+WARNING 2021-09-08 11:53:38,657 Unauthorized: /contracts/1/
+WARNING 2021-09-08 11:53:38,725 Forbidden: /events/
+WARNING 2021-09-08 11:53:38,734 Forbidden: /events/
+WARNING 2021-09-08 11:53:38,735 Unauthorized: /events/
+WARNING 2021-09-08 11:53:38,741 Bad Request: /events/
+WARNING 2021-09-08 11:53:38,742 Unauthorized: /events/
+WARNING 2021-09-08 11:53:38,785 Unauthorized: /events/
+WARNING 2021-09-08 11:53:38,796 Unauthorized: /events/
+WARNING 2021-09-08 11:53:38,807 Forbidden: /events/1/
+WARNING 2021-09-08 11:53:38,819 Forbidden: /events/1/
+WARNING 2021-09-08 11:53:38,827 Unauthorized: /events/1/
+WARNING 2021-09-08 11:53:38,833 Bad Request: /events/1/
+WARNING 2021-09-08 11:53:38,835 Unauthorized: /events/1/
+WARNING 2021-09-08 12:46:17,987 Forbidden: /users/
+WARNING 2021-09-08 12:46:17,990 Forbidden: /users/
+WARNING 2021-09-08 12:46:17,997 Unauthorized: /users/
+WARNING 2021-09-08 12:46:17,999 Unauthorized: /users/
+WARNING 2021-09-08 12:46:18,010 Forbidden: /users/2/
+WARNING 2021-09-08 12:46:18,013 Forbidden: /users/2/
+WARNING 2021-09-08 12:46:18,015 Unauthorized: /users/2/
+WARNING 2021-09-08 12:46:18,017 Unauthorized: /users/2/
+WARNING 2021-09-08 12:46:18,132 Unauthorized: /login/
+WARNING 2021-09-08 12:46:18,139 Forbidden: /users/
+WARNING 2021-09-08 12:46:18,142 Forbidden: /users/
+WARNING 2021-09-08 12:46:18,143 Unauthorized: /users/
+WARNING 2021-09-08 12:46:18,157 Unauthorized: /users/
+WARNING 2021-09-08 12:46:18,166 Forbidden: /users/2/
+WARNING 2021-09-08 12:46:18,169 Forbidden: /users/2/
+WARNING 2021-09-08 12:46:18,170 Unauthorized: /users/2/
+WARNING 2021-09-08 12:46:18,172 Unauthorized: /users/2/
+WARNING 2021-09-08 12:46:18,428 Forbidden: /clients/
+WARNING 2021-09-08 12:46:18,437 Forbidden: /clients/
+WARNING 2021-09-08 12:46:18,439 Unauthorized: /clients/
+WARNING 2021-09-08 12:46:18,445 Bad Request: /clients/
+WARNING 2021-09-08 12:46:18,447 Unauthorized: /clients/
+WARNING 2021-09-08 12:46:18,465 Unauthorized: /clients/
+WARNING 2021-09-08 12:46:18,474 Unauthorized: /clients/
+WARNING 2021-09-08 12:46:18,483 Forbidden: /clients/1/
+WARNING 2021-09-08 12:46:18,491 Forbidden: /clients/1/
+WARNING 2021-09-08 12:46:18,496 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 12:46:18,500 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:46:18,504 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:46:18,513 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:46:18,514 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:46:18,516 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:46:18,518 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:46:18,523 Bad Request: /clients/1/
+WARNING 2021-09-08 12:46:18,525 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:46:18,597 Forbidden: /contracts/
+WARNING 2021-09-08 12:46:18,604 Forbidden: /contracts/
+WARNING 2021-09-08 12:46:18,606 Unauthorized: /contracts/
+WARNING 2021-09-08 12:46:18,608 Unauthorized: /contracts/
+WARNING 2021-09-08 12:46:18,634 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:46:18,635 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:46:18,662 Unauthorized: /contracts/
+WARNING 2021-09-08 12:46:18,670 Unauthorized: /contracts/
+WARNING 2021-09-08 12:46:18,680 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:46:18,689 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:46:18,694 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 12:46:18,697 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:46:18,701 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:46:18,711 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:46:18,713 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:46:18,715 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:46:18,716 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:46:18,718 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:46:18,791 Forbidden: /events/
+WARNING 2021-09-08 12:46:18,800 Forbidden: /events/
+WARNING 2021-09-08 12:46:18,802 Unauthorized: /events/
+WARNING 2021-09-08 12:46:18,807 Bad Request: /events/
+WARNING 2021-09-08 12:46:18,809 Unauthorized: /events/
+WARNING 2021-09-08 12:46:18,851 Unauthorized: /events/
+WARNING 2021-09-08 12:46:18,863 Unauthorized: /events/
+WARNING 2021-09-08 12:46:18,873 Forbidden: /events/1/
+WARNING 2021-09-08 12:46:18,884 Forbidden: /events/1/
+WARNING 2021-09-08 12:46:18,892 Unauthorized: /events/1/
+WARNING 2021-09-08 12:46:18,899 Bad Request: /events/1/
+WARNING 2021-09-08 12:46:18,901 Unauthorized: /events/1/
+WARNING 2021-09-08 12:51:12,799 Forbidden: /users/
+WARNING 2021-09-08 12:51:12,802 Forbidden: /users/
+WARNING 2021-09-08 12:51:12,808 Unauthorized: /users/
+WARNING 2021-09-08 12:51:12,810 Unauthorized: /users/
+WARNING 2021-09-08 12:51:12,823 Forbidden: /users/2/
+WARNING 2021-09-08 12:51:12,826 Forbidden: /users/2/
+WARNING 2021-09-08 12:51:12,828 Unauthorized: /users/2/
+WARNING 2021-09-08 12:51:12,829 Unauthorized: /users/2/
+WARNING 2021-09-08 12:51:12,943 Unauthorized: /login/
+WARNING 2021-09-08 12:51:12,951 Forbidden: /users/
+WARNING 2021-09-08 12:51:12,954 Forbidden: /users/
+WARNING 2021-09-08 12:51:12,956 Unauthorized: /users/
+WARNING 2021-09-08 12:51:12,966 Unauthorized: /users/
+WARNING 2021-09-08 12:51:12,975 Forbidden: /users/2/
+WARNING 2021-09-08 12:51:12,978 Forbidden: /users/2/
+WARNING 2021-09-08 12:51:12,979 Unauthorized: /users/2/
+WARNING 2021-09-08 12:51:12,981 Unauthorized: /users/2/
+WARNING 2021-09-08 12:51:13,234 Forbidden: /clients/
+WARNING 2021-09-08 12:51:13,242 Forbidden: /clients/
+WARNING 2021-09-08 12:51:13,244 Unauthorized: /clients/
+WARNING 2021-09-08 12:51:13,249 Bad Request: /clients/
+WARNING 2021-09-08 12:51:13,251 Unauthorized: /clients/
+WARNING 2021-09-08 12:51:13,268 Unauthorized: /clients/
+WARNING 2021-09-08 12:51:13,277 Unauthorized: /clients/
+WARNING 2021-09-08 12:51:13,285 Forbidden: /clients/1/
+WARNING 2021-09-08 12:51:13,295 Forbidden: /clients/1/
+WARNING 2021-09-08 12:51:13,299 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 12:51:13,302 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:51:13,305 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:51:13,314 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:51:13,317 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:51:13,319 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:51:13,320 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:51:13,326 Bad Request: /clients/1/
+WARNING 2021-09-08 12:51:13,328 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:51:13,400 Forbidden: /contracts/
+WARNING 2021-09-08 12:51:13,408 Forbidden: /contracts/
+WARNING 2021-09-08 12:51:13,410 Unauthorized: /contracts/
+WARNING 2021-09-08 12:51:13,413 Unauthorized: /contracts/
+WARNING 2021-09-08 12:51:13,423 Forbidden: /contracts/
+WARNING 2021-09-08 12:51:13,437 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:51:13,439 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:51:13,466 Unauthorized: /contracts/
+WARNING 2021-09-08 12:51:13,472 Unauthorized: /contracts/
+WARNING 2021-09-08 12:51:13,483 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:51:13,491 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:51:13,496 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 12:51:13,499 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:51:13,504 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:51:13,514 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:51:13,516 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:51:13,517 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:51:13,519 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:51:13,520 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:51:13,588 Forbidden: /events/
+WARNING 2021-09-08 12:51:13,598 Forbidden: /events/
+WARNING 2021-09-08 12:51:13,600 Unauthorized: /events/
+WARNING 2021-09-08 12:51:13,606 Bad Request: /events/
+WARNING 2021-09-08 12:51:13,608 Unauthorized: /events/
+WARNING 2021-09-08 12:51:13,648 Unauthorized: /events/
+WARNING 2021-09-08 12:51:13,660 Unauthorized: /events/
+WARNING 2021-09-08 12:51:13,670 Forbidden: /events/1/
+WARNING 2021-09-08 12:51:13,681 Forbidden: /events/1/
+WARNING 2021-09-08 12:51:13,689 Unauthorized: /events/1/
+WARNING 2021-09-08 12:51:13,695 Bad Request: /events/1/
+WARNING 2021-09-08 12:51:13,697 Unauthorized: /events/1/
+WARNING 2021-09-08 12:52:37,947 Forbidden: /contracts/
+WARNING 2021-09-08 12:52:37,947 "GET /contracts/ HTTP/1.1" 403 83
+WARNING 2021-09-08 12:55:34,636 Forbidden: /users/
+WARNING 2021-09-08 12:55:34,639 Forbidden: /users/
+WARNING 2021-09-08 12:55:34,646 Unauthorized: /users/
+WARNING 2021-09-08 12:55:34,647 Unauthorized: /users/
+WARNING 2021-09-08 12:55:34,660 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:34,663 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:34,665 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:34,666 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:34,784 Unauthorized: /login/
+WARNING 2021-09-08 12:55:34,793 Forbidden: /users/
+WARNING 2021-09-08 12:55:34,796 Forbidden: /users/
+WARNING 2021-09-08 12:55:34,798 Unauthorized: /users/
+WARNING 2021-09-08 12:55:34,809 Unauthorized: /users/
+WARNING 2021-09-08 12:55:34,817 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:34,821 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:34,823 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:34,825 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:35,068 Forbidden: /clients/
+WARNING 2021-09-08 12:55:35,077 Forbidden: /clients/
+WARNING 2021-09-08 12:55:35,078 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:35,083 Bad Request: /clients/
+WARNING 2021-09-08 12:55:35,085 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:35,103 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:35,112 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:35,121 Forbidden: /clients/1/
+WARNING 2021-09-08 12:55:35,129 Forbidden: /clients/1/
+WARNING 2021-09-08 12:55:35,133 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 12:55:35,138 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:55:35,142 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:55:35,152 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:55:35,154 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:55:35,156 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:55:35,158 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:55:35,164 Bad Request: /clients/1/
+WARNING 2021-09-08 12:55:35,166 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:55:35,239 Forbidden: /contracts/
+WARNING 2021-09-08 12:55:35,248 Forbidden: /contracts/
+WARNING 2021-09-08 12:55:35,249 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:35,251 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:35,263 Forbidden: /contracts/
+WARNING 2021-09-08 12:55:35,280 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:55:35,282 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:55:35,309 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:35,316 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:35,327 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:55:35,336 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:55:35,342 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 12:55:35,345 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:35,349 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:35,358 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:35,359 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:35,361 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:35,363 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:55:35,364 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:55:35,431 Forbidden: /events/
+WARNING 2021-09-08 12:55:35,440 Forbidden: /events/
+WARNING 2021-09-08 12:55:35,441 Unauthorized: /events/
+WARNING 2021-09-08 12:55:35,446 Bad Request: /events/
+WARNING 2021-09-08 12:55:35,448 Unauthorized: /events/
+WARNING 2021-09-08 12:55:35,490 Unauthorized: /events/
+WARNING 2021-09-08 12:55:35,502 Unauthorized: /events/
+WARNING 2021-09-08 12:55:35,513 Forbidden: /events/1/
+WARNING 2021-09-08 12:55:35,524 Forbidden: /events/1/
+WARNING 2021-09-08 12:55:35,532 Unauthorized: /events/1/
+WARNING 2021-09-08 12:55:35,537 Bad Request: /events/1/
+WARNING 2021-09-08 12:55:35,539 Unauthorized: /events/1/
+WARNING 2021-09-08 12:55:48,347 Forbidden: /users/
+WARNING 2021-09-08 12:55:48,351 Forbidden: /users/
+WARNING 2021-09-08 12:55:48,358 Unauthorized: /users/
+WARNING 2021-09-08 12:55:48,360 Unauthorized: /users/
+WARNING 2021-09-08 12:55:48,373 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:48,376 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:48,378 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:48,380 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:48,495 Unauthorized: /login/
+WARNING 2021-09-08 12:55:48,502 Forbidden: /users/
+WARNING 2021-09-08 12:55:48,506 Forbidden: /users/
+WARNING 2021-09-08 12:55:48,508 Unauthorized: /users/
+WARNING 2021-09-08 12:55:48,518 Unauthorized: /users/
+WARNING 2021-09-08 12:55:48,526 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:48,529 Forbidden: /users/2/
+WARNING 2021-09-08 12:55:48,530 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:48,532 Unauthorized: /users/2/
+WARNING 2021-09-08 12:55:48,773 Forbidden: /clients/
+WARNING 2021-09-08 12:55:48,782 Forbidden: /clients/
+WARNING 2021-09-08 12:55:48,783 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:48,789 Bad Request: /clients/
+WARNING 2021-09-08 12:55:48,792 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:48,809 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:48,817 Unauthorized: /clients/
+WARNING 2021-09-08 12:55:48,826 Forbidden: /clients/1/
+WARNING 2021-09-08 12:55:48,834 Forbidden: /clients/1/
+WARNING 2021-09-08 12:55:48,839 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 12:55:48,843 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:55:48,847 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:55:48,857 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 12:55:48,858 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:55:48,860 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 12:55:48,862 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:55:48,867 Bad Request: /clients/1/
+WARNING 2021-09-08 12:55:48,869 Unauthorized: /clients/1/
+WARNING 2021-09-08 12:55:48,941 Forbidden: /contracts/
+WARNING 2021-09-08 12:55:48,948 Forbidden: /contracts/
+WARNING 2021-09-08 12:55:48,950 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:48,952 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:48,978 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:55:48,980 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 12:55:49,006 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:49,013 Unauthorized: /contracts/
+WARNING 2021-09-08 12:55:49,023 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:55:49,032 Forbidden: /contracts/1/
+WARNING 2021-09-08 12:55:49,038 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 12:55:49,042 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:49,046 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:49,056 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:49,058 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:49,060 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 12:55:49,061 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:55:49,063 Unauthorized: /contracts/1/
+WARNING 2021-09-08 12:55:49,134 Forbidden: /events/
+WARNING 2021-09-08 12:55:49,143 Forbidden: /events/
+WARNING 2021-09-08 12:55:49,145 Unauthorized: /events/
+WARNING 2021-09-08 12:55:49,150 Bad Request: /events/
+WARNING 2021-09-08 12:55:49,152 Unauthorized: /events/
+WARNING 2021-09-08 12:55:49,196 Unauthorized: /events/
+WARNING 2021-09-08 12:55:49,208 Unauthorized: /events/
+WARNING 2021-09-08 12:55:49,219 Forbidden: /events/1/
+WARNING 2021-09-08 12:55:49,229 Forbidden: /events/1/
+WARNING 2021-09-08 12:55:49,237 Unauthorized: /events/1/
+WARNING 2021-09-08 12:55:49,243 Bad Request: /events/1/
+WARNING 2021-09-08 12:55:49,245 Unauthorized: /events/1/
+WARNING 2021-09-08 13:57:46,715 Forbidden: /users/
+WARNING 2021-09-08 13:57:46,718 Forbidden: /users/
+WARNING 2021-09-08 13:57:46,814 Unauthorized: /users/
+WARNING 2021-09-08 13:57:46,817 Unauthorized: /users/
+WARNING 2021-09-08 13:57:46,833 Forbidden: /users/2/
+WARNING 2021-09-08 13:57:46,838 Forbidden: /users/2/
+WARNING 2021-09-08 13:57:46,841 Unauthorized: /users/2/
+WARNING 2021-09-08 13:57:46,844 Unauthorized: /users/2/
+WARNING 2021-09-08 13:57:46,994 Unauthorized: /login/
+WARNING 2021-09-08 13:57:47,002 Forbidden: /users/
+WARNING 2021-09-08 13:57:47,005 Forbidden: /users/
+WARNING 2021-09-08 13:57:47,007 Unauthorized: /users/
+WARNING 2021-09-08 13:57:47,023 Unauthorized: /users/
+WARNING 2021-09-08 13:57:47,035 Forbidden: /users/2/
+WARNING 2021-09-08 13:57:47,039 Forbidden: /users/2/
+WARNING 2021-09-08 13:57:47,041 Unauthorized: /users/2/
+WARNING 2021-09-08 13:57:47,043 Unauthorized: /users/2/
+WARNING 2021-09-08 13:57:47,320 Forbidden: /clients/
+WARNING 2021-09-08 13:57:47,330 Forbidden: /clients/
+WARNING 2021-09-08 13:57:47,332 Unauthorized: /clients/
+WARNING 2021-09-08 13:57:47,339 Bad Request: /clients/
+WARNING 2021-09-08 13:57:47,342 Unauthorized: /clients/
+WARNING 2021-09-08 13:57:47,360 Unauthorized: /clients/
+WARNING 2021-09-08 13:57:47,371 Unauthorized: /clients/
+WARNING 2021-09-08 13:57:47,383 Forbidden: /clients/1/
+WARNING 2021-09-08 13:57:47,394 Forbidden: /clients/1/
+WARNING 2021-09-08 13:57:47,401 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 13:57:47,404 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 13:57:47,409 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 13:57:47,420 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 13:57:47,422 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 13:57:47,424 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 13:57:47,426 Unauthorized: /clients/1/
+WARNING 2021-09-08 13:57:47,433 Bad Request: /clients/1/
+WARNING 2021-09-08 13:57:47,435 Unauthorized: /clients/1/
+WARNING 2021-09-08 13:57:47,519 Forbidden: /contracts/
+WARNING 2021-09-08 13:57:47,526 Forbidden: /contracts/
+WARNING 2021-09-08 13:57:47,529 Unauthorized: /contracts/
+WARNING 2021-09-08 13:57:47,530 Unauthorized: /contracts/
+WARNING 2021-09-08 13:57:47,562 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 13:57:47,564 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 13:57:47,594 Unauthorized: /contracts/
+WARNING 2021-09-08 13:57:47,602 Unauthorized: /contracts/
+WARNING 2021-09-08 13:57:47,612 Forbidden: /contracts/1/
+WARNING 2021-09-08 13:57:47,622 Forbidden: /contracts/1/
+WARNING 2021-09-08 13:57:47,630 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 13:57:47,633 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 13:57:47,638 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 13:57:47,649 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 13:57:47,652 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 13:57:47,654 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 13:57:47,656 Unauthorized: /contracts/1/
+WARNING 2021-09-08 13:57:47,658 Unauthorized: /contracts/1/
+WARNING 2021-09-08 13:57:47,736 Forbidden: /events/
+WARNING 2021-09-08 13:57:47,749 Forbidden: /events/
+WARNING 2021-09-08 13:57:47,752 Unauthorized: /events/
+WARNING 2021-09-08 13:57:47,759 Bad Request: /events/
+WARNING 2021-09-08 13:57:47,761 Unauthorized: /events/
+WARNING 2021-09-08 13:57:47,810 Unauthorized: /events/
+WARNING 2021-09-08 13:57:47,825 Unauthorized: /events/
+WARNING 2021-09-08 13:57:47,837 Forbidden: /events/1/
+WARNING 2021-09-08 13:57:47,851 Forbidden: /events/1/
+WARNING 2021-09-08 13:57:47,854 Forbidden: /events/1/
+WARNING 2021-09-08 13:57:47,866 Unauthorized: /events/1/
+WARNING 2021-09-08 13:57:47,873 Bad Request: /events/1/
+WARNING 2021-09-08 13:57:47,876 Unauthorized: /events/1/
+WARNING 2021-09-08 13:58:16,800 Forbidden: /users/
+WARNING 2021-09-08 13:58:16,804 Forbidden: /users/
+WARNING 2021-09-08 13:58:16,814 Unauthorized: /users/
+WARNING 2021-09-08 13:58:16,816 Unauthorized: /users/
+WARNING 2021-09-08 13:58:16,832 Forbidden: /users/2/
+WARNING 2021-09-08 13:58:16,835 Forbidden: /users/2/
+WARNING 2021-09-08 13:58:16,838 Unauthorized: /users/2/
+WARNING 2021-09-08 13:58:16,840 Unauthorized: /users/2/
+WARNING 2021-09-08 13:58:16,980 Unauthorized: /login/
+WARNING 2021-09-08 13:58:16,991 Forbidden: /users/
+WARNING 2021-09-08 13:58:16,994 Forbidden: /users/
+WARNING 2021-09-08 13:58:16,997 Unauthorized: /users/
+WARNING 2021-09-08 13:58:17,011 Unauthorized: /users/
+WARNING 2021-09-08 13:58:17,022 Forbidden: /users/2/
+WARNING 2021-09-08 13:58:17,026 Forbidden: /users/2/
+WARNING 2021-09-08 13:58:17,028 Unauthorized: /users/2/
+WARNING 2021-09-08 13:58:17,030 Unauthorized: /users/2/
+WARNING 2021-09-08 13:58:17,338 Forbidden: /clients/
+WARNING 2021-09-08 13:58:17,349 Forbidden: /clients/
+WARNING 2021-09-08 13:58:17,351 Unauthorized: /clients/
+WARNING 2021-09-08 13:58:17,358 Bad Request: /clients/
+WARNING 2021-09-08 13:58:17,360 Unauthorized: /clients/
+WARNING 2021-09-08 13:58:17,381 Unauthorized: /clients/
+WARNING 2021-09-08 13:58:17,396 Unauthorized: /clients/
+WARNING 2021-09-08 13:58:17,409 Forbidden: /clients/1/
+WARNING 2021-09-08 13:58:17,421 Forbidden: /clients/1/
+WARNING 2021-09-08 13:58:17,426 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 13:58:17,430 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 13:58:17,434 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 13:58:17,445 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 13:58:17,447 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 13:58:17,449 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 13:58:17,451 Unauthorized: /clients/1/
+WARNING 2021-09-08 13:58:17,459 Bad Request: /clients/1/
+WARNING 2021-09-08 13:58:17,461 Unauthorized: /clients/1/
+WARNING 2021-09-08 13:58:17,543 Forbidden: /contracts/
+WARNING 2021-09-08 13:58:17,552 Forbidden: /contracts/
+WARNING 2021-09-08 13:58:17,555 Unauthorized: /contracts/
+WARNING 2021-09-08 13:58:17,557 Unauthorized: /contracts/
+WARNING 2021-09-08 13:58:17,588 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 13:58:17,590 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 13:58:17,619 Unauthorized: /contracts/
+WARNING 2021-09-08 13:58:17,626 Unauthorized: /contracts/
+WARNING 2021-09-08 13:58:17,639 Forbidden: /contracts/1/
+WARNING 2021-09-08 13:58:17,648 Forbidden: /contracts/1/
+WARNING 2021-09-08 13:58:17,654 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 13:58:17,658 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 13:58:17,663 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 13:58:17,675 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 13:58:17,678 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 13:58:17,680 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 13:58:17,682 Unauthorized: /contracts/1/
+WARNING 2021-09-08 13:58:17,684 Unauthorized: /contracts/1/
+WARNING 2021-09-08 13:58:17,765 Forbidden: /events/
+WARNING 2021-09-08 13:58:17,775 Forbidden: /events/
+WARNING 2021-09-08 13:58:17,778 Unauthorized: /events/
+WARNING 2021-09-08 13:58:17,786 Bad Request: /events/
+WARNING 2021-09-08 13:58:17,789 Unauthorized: /events/
+WARNING 2021-09-08 13:58:17,836 Unauthorized: /events/
+WARNING 2021-09-08 13:58:17,852 Unauthorized: /events/
+WARNING 2021-09-08 13:58:17,864 Forbidden: /events/1/
+WARNING 2021-09-08 13:58:17,876 Forbidden: /events/1/
+WARNING 2021-09-08 13:58:17,879 Forbidden: /events/1/
+WARNING 2021-09-08 13:58:17,883 Unauthorized: /events/1/
+WARNING 2021-09-08 13:58:17,890 Bad Request: /events/1/
+WARNING 2021-09-08 13:58:17,892 Unauthorized: /events/1/
+WARNING 2021-09-08 13:59:50,889 Unauthorized: /events/4/
+WARNING 2021-09-08 13:59:50,889 "PATCH /events/4/ HTTP/1.1" 401 58
+WARNING 2021-09-08 13:59:57,179 Forbidden: /events/4/
+WARNING 2021-09-08 13:59:57,179 "PATCH /events/4/ HTTP/1.1" 403 83
+WARNING 2021-09-08 14:03:18,422 Forbidden: /users/
+WARNING 2021-09-08 14:03:18,427 Forbidden: /users/
+WARNING 2021-09-08 14:03:18,434 Unauthorized: /users/
+WARNING 2021-09-08 14:03:18,436 Unauthorized: /users/
+WARNING 2021-09-08 14:03:18,449 Forbidden: /users/2/
+WARNING 2021-09-08 14:03:18,452 Forbidden: /users/2/
+WARNING 2021-09-08 14:03:18,454 Unauthorized: /users/2/
+WARNING 2021-09-08 14:03:18,456 Unauthorized: /users/2/
+WARNING 2021-09-08 14:03:18,569 Unauthorized: /login/
+WARNING 2021-09-08 14:03:18,576 Forbidden: /users/
+WARNING 2021-09-08 14:03:18,579 Forbidden: /users/
+WARNING 2021-09-08 14:03:18,580 Unauthorized: /users/
+WARNING 2021-09-08 14:03:18,590 Unauthorized: /users/
+WARNING 2021-09-08 14:03:18,597 Forbidden: /users/2/
+WARNING 2021-09-08 14:03:18,600 Forbidden: /users/2/
+WARNING 2021-09-08 14:03:18,602 Unauthorized: /users/2/
+WARNING 2021-09-08 14:03:18,604 Unauthorized: /users/2/
+WARNING 2021-09-08 14:03:18,858 Forbidden: /clients/
+WARNING 2021-09-08 14:03:18,867 Forbidden: /clients/
+WARNING 2021-09-08 14:03:18,869 Unauthorized: /clients/
+WARNING 2021-09-08 14:03:18,874 Bad Request: /clients/
+WARNING 2021-09-08 14:03:18,876 Unauthorized: /clients/
+WARNING 2021-09-08 14:03:18,893 Unauthorized: /clients/
+WARNING 2021-09-08 14:03:18,902 Unauthorized: /clients/
+WARNING 2021-09-08 14:03:18,912 Forbidden: /clients/1/
+WARNING 2021-09-08 14:03:18,924 Forbidden: /clients/1/
+WARNING 2021-09-08 14:03:18,928 Bad Request: /clients/3/change_status/
+WARNING 2021-09-08 14:03:18,931 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 14:03:18,935 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 14:03:18,944 Forbidden: /clients/1/change_status/
+WARNING 2021-09-08 14:03:18,946 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 14:03:18,947 Unauthorized: /clients/1/change_status/
+WARNING 2021-09-08 14:03:18,949 Unauthorized: /clients/1/
+WARNING 2021-09-08 14:03:18,956 Bad Request: /clients/1/
+WARNING 2021-09-08 14:03:18,958 Unauthorized: /clients/1/
+WARNING 2021-09-08 14:03:19,033 Forbidden: /contracts/
+WARNING 2021-09-08 14:03:19,042 Forbidden: /contracts/
+WARNING 2021-09-08 14:03:19,044 Unauthorized: /contracts/
+WARNING 2021-09-08 14:03:19,046 Unauthorized: /contracts/
+WARNING 2021-09-08 14:03:19,072 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 14:03:19,074 Unauthorized: /contracts/1/events/
+WARNING 2021-09-08 14:03:19,100 Unauthorized: /contracts/
+WARNING 2021-09-08 14:03:19,107 Unauthorized: /contracts/
+WARNING 2021-09-08 14:03:19,117 Forbidden: /contracts/1/
+WARNING 2021-09-08 14:03:19,127 Forbidden: /contracts/1/
+WARNING 2021-09-08 14:03:19,134 Bad Request: /contracts/3/change_status/
+WARNING 2021-09-08 14:03:19,137 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 14:03:19,142 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 14:03:19,151 Forbidden: /contracts/1/change_status/
+WARNING 2021-09-08 14:03:19,153 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 14:03:19,155 Unauthorized: /contracts/1/change_status/
+WARNING 2021-09-08 14:03:19,157 Unauthorized: /contracts/1/
+WARNING 2021-09-08 14:03:19,158 Unauthorized: /contracts/1/
+WARNING 2021-09-08 14:03:19,228 Forbidden: /events/
+WARNING 2021-09-08 14:03:19,236 Forbidden: /events/
+WARNING 2021-09-08 14:03:19,238 Unauthorized: /events/
+WARNING 2021-09-08 14:03:19,244 Bad Request: /events/
+WARNING 2021-09-08 14:03:19,245 Unauthorized: /events/
+WARNING 2021-09-08 14:03:19,288 Unauthorized: /events/
+WARNING 2021-09-08 14:03:19,301 Unauthorized: /events/
+WARNING 2021-09-08 14:03:19,314 Forbidden: /events/1/
+WARNING 2021-09-08 14:03:19,328 Forbidden: /events/1/
+WARNING 2021-09-08 14:03:19,338 Unauthorized: /events/1/
+WARNING 2021-09-08 14:03:19,343 Bad Request: /events/1/
+WARNING 2021-09-08 14:03:19,344 Unauthorized: /events/1/

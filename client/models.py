@@ -23,3 +23,6 @@ class Client(models.Model):
     DateUpdated = models.DateTimeField(auto_now=True)
     SalesContactID = models.ForeignKey(to=Staff, on_delete=models.CASCADE)
     ClientStatutID = models.ForeignKey(to=ClientStatut, on_delete=models.CASCADE)
+
+    def get_staff_contact(self):
+        return [self.SalesContactID]
