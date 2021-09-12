@@ -1,3 +1,5 @@
+"""Project OC DAP 12 - Account test file."""
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -8,7 +10,9 @@ from rest_framework.test import force_authenticate
 
 from .models import Staff
 
-class ClientTests(APITestCase):
+class AccountTests(APITestCase):
+    """Account test case."""
+
     fixtures = [
         "staffprofile_data.json", 
         "clientstatut_data.json", 
@@ -21,9 +25,8 @@ class ClientTests(APITestCase):
         ]   
             
     def test_succeed_authentification(self):
-        """
-        Test a successful authentification.
-        """
+        """Test a successful authentification."""
+
         url = reverse('login')
         data = {'username': 'StaffManagementA', 'password': 'password'}
         response = self.client.post(url, data, format='json')
@@ -32,6 +35,8 @@ class ClientTests(APITestCase):
         self.assertIn("access", response.data)
 
     def test_failed_authentification(self):
+        """Test a fail authentification."""
+
         url = reverse('login')
         data = {'username': 'UnknownUser', 'password': 'password'}
         response = self.client.post(url, data, format='json')
@@ -42,6 +47,8 @@ class ClientTests(APITestCase):
         
 
     def test_list_user_as_management(self):
+        """Test the user list as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -52,6 +59,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 6)
 
     def test_list_user_as_sales(self):
+        """Test the user list as a sales team member."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -61,6 +70,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_list_user_as_support(self):
+        """Test the user list as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -70,6 +81,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_list_user_with_fake_JWT(self):
+        """Test the user list with a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -80,12 +93,17 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_list_user_without_JWT(self):
+        """Test the user list without giving a Json Web Token."""
+
         url = reverse('users-list')
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+
     def test_list_user_with_profile_filter(self):
+        """Test the user list with a profile filter."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -96,6 +114,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 2)
 
     def test_list_user_with_search(self):
+        """Test the user list with a search filter."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -107,6 +127,8 @@ class ClientTests(APITestCase):
 
 
     def test_add_user_as_management(self):
+        """Test the user create as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -121,6 +143,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_add_user_as_sales(self):
+        """Test the user create as a sales team member."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -135,6 +159,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_user_as_support(self):
+        """Test the user create as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -149,6 +175,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_user_with_fake_JWT(self):
+        """Test the user create with a fake Json Web Token."""
+
         token = 'fake_token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -164,6 +192,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_add_user_without_JWT(self):
+        """Test the user create without giving a Json Web Token."""
+
         url = reverse('users-list')
         data = {
             'username': 'NewUser5', 
@@ -176,6 +206,8 @@ class ClientTests(APITestCase):
 
 
     def test_modify_user_as_management(self):
+        """Test the user update as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -187,6 +219,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["username"], "ModifUser")
 
     def test_modify_user_as_sales(self):
+        """Test the user update as a sales team member."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -197,6 +231,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_user_as_support(self):
+        """Test the user update as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -207,6 +243,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_user_with_fake_JWT(self):
+        """Test the user update with a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -218,6 +256,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_modify_user_without_JWT(self):
+        """Test the user update without giving a Json Web Token."""
+
         url = reverse('users-detail', kwargs = {'pk': 2})
         data = {'username': 'ModifUser'}
         response = self.client.patch(url, data, format='json')
@@ -226,6 +266,8 @@ class ClientTests(APITestCase):
 
 
     def test_delete_user_as_management(self):
+        """Test the user delete as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -235,6 +277,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_delete_user_as_sales(self):
+        """Test the user delete as a sales team member."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -244,6 +288,7 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_delete_user_as_support(self):
+        """Test the user delete as a support team member."""
 
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
@@ -254,6 +299,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_delete_user_with_fake_JWT(self):
+        """Test the user delete with a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -264,6 +311,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_delete_user_without_JWT(self):
+        """Test the user delete without giving a Json Web Token."""
+
         url = reverse('users-detail', kwargs = {'pk': 2})
         response = self.client.delete(url, format='json')
 

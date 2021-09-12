@@ -22,6 +22,8 @@ class EventModelViewSet(viewsets.ModelViewSet):
     AllowedActionsEvent]
 
     def get_queryset(self):
+        """Get the events to be listed."""
+
         queryset = Event.objects.all()
         StaffContactID = self.request.query_params.get('contact')
         if StaffContactID is not None:
@@ -36,7 +38,8 @@ class EventModelViewSet(viewsets.ModelViewSet):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        """List all events."""
+        """Update the event status during the listing."""
+
         past_events = Event.objects.filter(EventDate__lt = datetime.now())
 
         for event in past_events:

@@ -1,4 +1,4 @@
-"""Project OC DAP 10 - Comments view file."""
+"""Project OC DAP 12 - Client view file."""
 
 from .serializers import ClientSerializer
 from .models import Client, ClientStatut
@@ -25,6 +25,8 @@ class ClientModelViewSet(viewsets.ModelViewSet):
     IsStaffContact, AllowedActionsClient]
 
     def get_queryset(self):
+        """Get the clients to be listed."""
+
         queryset = Client.objects.all()
         SalesContactID = self.request.query_params.get('contact')
         if SalesContactID is not None:
@@ -41,6 +43,8 @@ class ClientModelViewSet(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True, permission_classes=[IsAuthenticated, 
     IsStaffContact])
     def change_status(self, request, pk=None):
+        """Change the client status to actual."""
+
         client = Client.objects.get(id = pk)
         self.check_object_permissions(request, client)
         if client.ClientStatutID.id != 1: 

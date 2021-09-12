@@ -25,6 +25,8 @@ class ContractModelViewSet(viewsets.ModelViewSet):
     IsStaffContact, AllowedActionsContract]
  
     def get_queryset(self):
+        """Get the contracts to be listed."""
+
         queryset = Contract.objects.all()
         ClientID = self.request.query_params.get('client')
         if ClientID is not None:
@@ -40,6 +42,8 @@ class ContractModelViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated])
     def events(self, request, pk=None):
+        """Get the contract events to be listed."""
+
         contract = Contract.objects.get(id = pk)
         queryset = Event.objects.filter(ContractID=contract)
 
@@ -49,6 +53,8 @@ class ContractModelViewSet(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True, permission_classes=[IsAuthenticated, 
     IsStaffContact])
     def change_status(self, request, pk=None):
+        """Change the contract status to signed."""
+
         contract = Contract.objects.get(id = pk)
         self.check_object_permissions(request, contract)
         if contract.ContractStatutID.id != 1: 

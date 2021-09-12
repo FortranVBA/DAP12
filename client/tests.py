@@ -1,3 +1,5 @@
+"""Project OC DAP 12 - Client test file."""
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -6,6 +8,8 @@ import json
 from account.models import Staff
 
 class ClientTests(APITestCase):
+    """Client test case."""
+
     fixtures = [
         "staffprofile_data.json", 
         "clientstatut_data.json", 
@@ -18,6 +22,8 @@ class ClientTests(APITestCase):
         ]   
 
     def test_list_client_as_management(self):
+        """Test the client list as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -28,6 +34,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_retrieve_client_as_management(self):
+        """Test the client retrieve as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -38,6 +46,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["CompanyName"], "ClientA")
 
     def test_list_client_as_sales(self):
+        """Test the client list as a sales team member."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -48,6 +58,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_list_client_as_support(self):
+        """Test the client list as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -58,6 +70,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 3)
 
     def test_list_client_with_fake_JWT(self):
+        """Test the client list with a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -68,6 +82,7 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_list_client_without_JWT(self):
+        """Test the client list without a Json Web Token."""
 
         url = reverse('clients-list')
         response = self.client.get(url)
@@ -75,6 +90,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_list_client_with_contact_filter(self):
+        """Test the client list with contact filter."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -84,7 +101,9 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
-    def test_list_client_with_statut_filter(self):
+    def test_list_client_with_status_filter(self):
+        """Test the client list with status filter."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -95,6 +114,8 @@ class ClientTests(APITestCase):
         self.assertEqual(len(response.data), 1)
 
     def test_list_client_with_search(self):
+        """Test the client list with search filter."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -106,6 +127,8 @@ class ClientTests(APITestCase):
 
 
     def test_add_client_as_management(self):
+        """Test the client create as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -125,6 +148,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_client_as_sales(self):
+        """Test the client create as a sales team member."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -144,6 +169,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_add_client_with_wrong_sales_contact(self):
+        """Test the client create with non valid sales contact field."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -163,6 +190,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_add_client_as_support(self):
+        """Test the client create as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -182,6 +211,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_client_with_fake_JWT(self):
+        """Test the client create as a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -202,6 +233,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_add_client_without_JWT(self):
+        """Test the client create without a Json Web Token."""
+
         url = reverse('clients-list')
         data = {
             'FirstName': 'JohnD', 
@@ -219,6 +252,8 @@ class ClientTests(APITestCase):
 
 
     def test_modify_client_as_management(self):
+        """Test the client update as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -230,6 +265,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["CompanyName"], "ModifCompanyName2")
 
     def test_modify_client_as_sales(self):
+        """Test the client update as a sales team member who is not the sales contact."""
+
         user = Staff.objects.get(username = 'StaffSalesB')
         self.client.force_authenticate(user)
 
@@ -240,6 +277,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_client_as_sales_contact(self):
+        """Test the client update as the sales contact."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -251,6 +290,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.data["CompanyName"], "ModifCompanyName")
 
     def test_modify_client_with_wrong_sales_contact(self):
+        """Test the client update with non valid sales contact field."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -261,6 +302,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_modify_client_as_support(self):
+        """Test the client update as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -271,6 +314,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_modify_client_with_fake_JWT(self):
+        """Test the client update with a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -282,6 +327,8 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_modify_client_without_JWT(self):
+        """Test the client update without Json Web Token."""
+
         url = reverse('clients-detail', kwargs = {'pk': 1})
         data = {'CompanyName': 'ModifCompanyName'}
         response = self.client.patch(url, data, format='json')
@@ -289,7 +336,9 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-    def test_modify_client_statut_as_management(self):
+    def test_modify_client_status_as_management(self):
+        """Test the client status update as a management team member."""
+
         user = Staff.objects.get(username = 'StaffManagementA')
         self.client.force_authenticate(user)
 
@@ -301,7 +350,9 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_modify_client_statut_as_sales_contact(self):
+    def test_modify_client_status_as_sales_contact(self):
+        """Test the client status update as the sales contact."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 
@@ -311,7 +362,10 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["ClientStatutID"], 1)
 
-    def test_modify_client_statut_as_sales(self):
+    def test_modify_client_status_as_sales(self):
+        """Test the client status update as a sales team member who is not the sales 
+        contact."""
+
         user = Staff.objects.get(username = 'StaffSalesB')
         self.client.force_authenticate(user)
 
@@ -320,7 +374,9 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_modify_client_statut_as_support(self):
+    def test_modify_client_status_as_support(self):
+        """Test the client status update as a support team member."""
+
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)
 
@@ -329,7 +385,9 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_modify_client_statut_with_fake_JWT(self):
+    def test_modify_client_status_with_fake_JWT(self):
+        """Test the client status update with a fake Json Web Token."""
+
         token = 'Fake_Token'
 
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
@@ -339,13 +397,17 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_modify_client_statut_without_JWT(self):
+    def test_modify_client_status_without_JWT(self):
+        """Test the client status update without a Json Web Token."""
+
         url = reverse('clients-change-status', kwargs = {'pk': 1})
         response = self.client.post(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_modify_client_statut__already_actual(self):
+    def test_modify_client_status__already_actual(self):
+        """Test the client status update of a client that already have this status."""
+
         user = Staff.objects.get(username = 'StaffSalesA')
         self.client.force_authenticate(user)
 

@@ -1,7 +1,9 @@
+"""Project OC DAP 12 - Permissions file."""
+
 from rest_framework import permissions
 
 class AllowedActionsAccount(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission that allow only specific actions for account application."""
 
     message = "This operation is not allowed."
 
@@ -13,7 +15,7 @@ class AllowedActionsAccount(permissions.BasePermission):
         return False
 
 class IsManagement(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission checking if the user is part of the management team."""
 
     message = "You must be part of management team for this operation."
 
@@ -23,7 +25,7 @@ class IsManagement(permissions.BasePermission):
 
 
 class AllowedActionsClient(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission that allow only specific actions for client application."""
 
     message = "This operation is not allowed."
 
@@ -36,7 +38,7 @@ class AllowedActionsClient(permissions.BasePermission):
         return False
 
 class IsSale(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission checking if the user is part of the sales team."""
 
     message = "You must be part of sales team for this operation."
 
@@ -48,7 +50,7 @@ class IsSale(permissions.BasePermission):
         return True
 
 class IsStaffContact(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission checking if the staff contact."""
 
     message = "You must be the sales contact for this operation."
 
@@ -68,7 +70,7 @@ class IsStaffContact(permissions.BasePermission):
 
 
 class IsStaffContactOrManagement(permissions.BasePermission):
-    """Permission checking if user is a project contributor or author."""
+    """Permission checking if the staff contact or part of the management team."""
 
     message = "You must be the staff contact of this project or from management team."
 
@@ -89,7 +91,7 @@ class IsStaffContactOrManagement(permissions.BasePermission):
         return True
 
 class AllowedActionsContract(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission that allow only specific actions for contract application."""
 
     message = "This operation is not allowed."
 
@@ -102,7 +104,7 @@ class AllowedActionsContract(permissions.BasePermission):
         return False
 
 class AllowedActionsEvent(permissions.BasePermission):
-    """Permission that denies all users."""
+    """Permission that allow only specific actions for event application."""
 
     message = "This operation is not allowed."
 

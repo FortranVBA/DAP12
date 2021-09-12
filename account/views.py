@@ -15,7 +15,7 @@ from rest_framework import filters
 # Create your views here.
 
 class StaffModelsViewSet(viewsets.ModelViewSet):
-    """Projects viewset."""
+    """Staff viewset."""
 
     serializer_class = StaffSerializer
     filter_backends = [filters.SearchFilter]
@@ -23,6 +23,7 @@ class StaffModelsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsManagement, AllowedActionsAccount]
 
     def get_queryset(self):
+        """Get the staff to be listed."""
         queryset = Staff.objects.all()
         profileID = self.request.query_params.get('profile')
         if profileID is not None:
