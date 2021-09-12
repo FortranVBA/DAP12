@@ -1,8 +1,9 @@
+"""Project OC DAP 12 - Client models file."""
+
 from django.db import models
 from account.models import Staff
 
 # Create your models here.
-
 
 class ClientStatut(models.Model):
     """ClientStatut model."""

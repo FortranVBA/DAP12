@@ -5,9 +5,8 @@ from rest_framework import serializers
 
 # Create your models here.
 
-
 class EventSerializer(serializers.ModelSerializer):
-    """Contract serializer."""
+    """Event serializer."""
 
     class Meta:
         """Serializer meta properties."""
@@ -26,6 +25,8 @@ class EventSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, data):
+        """Validate fields."""
+
         if 'SupportContactID' in data:
             staff = data['SupportContactID']
 

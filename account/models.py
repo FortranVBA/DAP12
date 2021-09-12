@@ -1,8 +1,9 @@
+"""Project OC DAP 12 - Account models file."""
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-
 
 class StaffProfile(models.Model):
     """StaffProfile model."""

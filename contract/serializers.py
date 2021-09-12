@@ -5,7 +5,6 @@ from rest_framework import serializers
 
 # Create your models here.
 
-
 class ContractSerializer(serializers.ModelSerializer):
     """Contract serializer."""
 

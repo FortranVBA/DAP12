@@ -1,6 +1,7 @@
+"""Project OC DAP 12 - Contract models file."""
+
 from django.db import models
 from client.models import Client
-
 
 # Create your models here.
 class ContractStatut(models.Model):

@@ -243,7 +243,7 @@ class ContractTests(APITestCase):
         user = Staff.objects.get(username = 'StaffSupportA')
         self.client.force_authenticate(user)  
 
-        url = reverse('contracts-events', kwargs = {'pk': 1})
+        url = reverse('contracts-events', kwargs={'pk': 1})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

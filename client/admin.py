@@ -1,3 +1,5 @@
+"""Project OC DAP 12 - Client admin file."""
+
 from django.contrib import admin
 from .models import Client, ClientStatut
 

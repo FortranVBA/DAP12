@@ -16,16 +16,11 @@ class StaffSerializer(serializers.ModelSerializer):
         fields = ["id", "username", 'StaffProfileID']
 
     def validate_password(self, value: str) -> str:
-        """
-        Hash value passed by user.
-
-        :param value: password of a user
-        :return: a hashed version of the password
-        """
+        """ Hash password passed by user."""
         return make_password(value)
 
     def create(self, validated_data):
-        """Create issue."""
+        """Create staff."""
 
         validated_data["is_staff"] = (validated_data["StaffProfileID"].Name == "Gestion")
         validated_data["is_superuser"] = (validated_data["StaffProfileID"].Name == "Gestion")
@@ -33,7 +28,7 @@ class StaffSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        """Update issue."""
+        """Update staff."""
 
         if "StaffProfileID" in validated_data:
             validated_data["is_staff"] = (validated_data["StaffProfileID"].Name == "Gestion")

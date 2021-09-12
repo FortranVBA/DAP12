@@ -6,7 +6,6 @@ from rest_framework import serializers
 
 # Create your models here.
 
-
 class ClientSerializer(serializers.ModelSerializer):
     """Client serializer."""
 
@@ -29,6 +28,8 @@ class ClientSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, data):
+        """Validate fields."""
+
         if 'SalesContactID' in data:
             staff = data['SalesContactID']
 
