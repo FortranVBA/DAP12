@@ -35,6 +35,18 @@ class EventTests(APITestCase):
         self.assertEqual(response.data[0]['EventStatutID'], 1)
         self.assertEqual(response.data[1]['EventStatutID'], 2)
 
+    def test_retrieve_event_as_management(self):
+        """Test the event retrieve as a management team member."""
+
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
+
+        url = reverse('events-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["Attendees"], 50)
+
     def test_list_event_as_sales(self):
         """Test the event list as a sales team member."""
 
@@ -48,6 +60,18 @@ class EventTests(APITestCase):
         self.assertEqual(len(response.data), 3)
         self.assertEqual(response.data[0]['EventStatutID'], 1)
         self.assertEqual(response.data[1]['EventStatutID'], 2)
+
+    def test_retrieve_event_as_sales(self):
+        """Test the event retrieve as a sales team member."""
+
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
+
+        url = reverse('events-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["Attendees"], 50)
 
     def test_list_event_as_support(self):
         """Test the event list as a support team member."""
@@ -63,6 +87,18 @@ class EventTests(APITestCase):
         self.assertEqual(response.data[0]['EventStatutID'], 1)
         self.assertEqual(response.data[1]['EventStatutID'], 2)
 
+    def test_retrieve_event_as_support(self):
+        """Test the event retrieve as a support team member."""
+
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
+
+        url = reverse('events-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["Attendees"], 50)
+
     def test_list_event_with_fake_JWT(self):
         """Test the event list with a fake Json Web Token."""
 
@@ -75,10 +111,30 @@ class EventTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_retrieve_event_with_fake_JWT(self):
+        """Test the event retrieve with a fake Json Web Token."""
+
+        token = 'Fake_Token'
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('events-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_list_event_without_JWT(self):
         """Test the event list without a Json Web Token."""
 
         url = reverse('events-list')
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_retrieve_event_without_JWT(self):
+        """Test the event retrieve without a Json Web Token."""
+
+        url = reverse('events-detail', kwargs = {'pk': 1})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

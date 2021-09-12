@@ -81,20 +81,13 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
    "default": {
        "ENGINE": "django.db.backends.postgresql",
-       "NAME": "DAP12",  # le nom de notre base de donnees creee precedemment
-       "USER": "postgres",  # attention : remplacez par votre nom d'utilisateur
+       "NAME": "DAP12",  # use your created database name
+       "USER": "postgres",  # replace with your postgres user logins
        "PASSWORD": "admin",
        "HOST": "",
        "PORT": "5432",
    }
 }
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

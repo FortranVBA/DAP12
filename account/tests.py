@@ -58,6 +58,18 @@ class AccountTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 6)
 
+    def test_retrieve_user_as_management(self):
+        """Test the user details retrieve as a management team member."""
+
+        user = Staff.objects.get(username = 'StaffManagementA')
+        self.client.force_authenticate(user)
+
+        url = reverse('users-detail', kwargs = {'pk': 1})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["username"], "StaffManagementA")
+
     def test_list_user_as_sales(self):
         """Test the user list as a sales team member."""
 
@@ -69,6 +81,17 @@ class AccountTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+    def test_retrieve_user_as_sales(self):
+        """Test the user details retrieve as a sales team member."""
+
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
+
+        url = reverse('users-detail', kwargs = {'pk': 1})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_list_user_as_support(self):
         """Test the user list as a support team member."""
 
@@ -76,6 +99,17 @@ class AccountTests(APITestCase):
         self.client.force_authenticate(user)
 
         url = reverse('users-list')
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_retrieve_user_as_support(self):
+        """Test the user details retrieve as a support team member."""
+
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
+
+        url = reverse('users-detail', kwargs = {'pk': 1})
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -92,6 +126,18 @@ class AccountTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_retrieve_user_with_fake_JWT(self):
+        """Test the user details retrieve with a fake Json Web Token."""
+
+        token = 'Fake_Token'
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('users-detail', kwargs = {'pk': 1})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_list_user_without_JWT(self):
         """Test the user list without giving a Json Web Token."""
 
@@ -100,6 +146,13 @@ class AccountTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_retrieve_user_without_JWT(self):
+        """Test the user details retrieve without giving a Json Web Token."""
+
+        url = reverse('users-detail', kwargs = {'pk': 1})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_list_user_with_profile_filter(self):
         """Test the user list with a profile filter."""

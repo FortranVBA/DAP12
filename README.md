@@ -1,6 +1,6 @@
-# Soft Desk API application
+# Application
 
-Soft Desk API is a back-end application to be executed locally in the context of OpenClassroom educational project. It allow registered users to report and follow project related issues. Registered users can create projects, add project contributors, create project issues and create issue comments. This application has been developed with the Django rest framework, using SQlite database.
+This application is a back-end application to be executed locally in the context of OpenClassroom educational project. It allow registered users to manage other users, clients, contracts and events (permissions are according their staff department). This application has been developed with the Django rest framework, using a postgres.
 
 ## Installation and first launch
 
@@ -11,9 +11,24 @@ This locally-executable application can be installed and executed from [http://l
 3. Create a virtual environment for the project with `$ py -m venv .venv` on windows or `$ python3 -m venv .venv` on macos or linux.
 4. Activate the virtual environment with `$ .venv\Scripts\activate` on windows or `$ source .venv/bin/activate` on macos or linux.
 5. Install project dependencies with `$ pip install -r requirements.txt`
-6. Run the server with `$ python manage.py runserver`
+6. Download and install PostgreSQL `https://www.postgresql.org/download/` (Follow instructions according your operating system).
+7. Create the project Posgres database (named DAP12) with `$ createdb -O (your postgre username) DAP12`.
+8. Configure the settings/settings.py file by putting your Postgres login in the variable called DATABASES (fields "USER" and "PASSWORD").
+9. Run the postgres database with `$ postgres -D /usr/local/pgsql/data` (the command may depends on your operating system).
+10. Run the django migration with `$ ./manage.py migrate`.
+11. Import the status fixtures with the following commands: 
+- `$ ./manage.py loaddata staffprofile_data.json`
+- `$ ./manage.py loaddata clientstatut_data.json`
+- `$ ./manage.py loaddata contractstatut_data.json`
+- `$ ./manage.py loaddata eventstatut_data.json`
+12. Import the data fixtures with the following commands:
+- `$ ./manage.py loaddata staff_data.json` (compulsory to have default profiles to login with)
+- `$ ./manage.py loaddata client_data.json` (optional if you want example data)
+- `$ ./manage.py loaddata contract_data.json` (optional if you want example data)
+- `$ ./manage.py loaddata event_data.json` (optional if you want example data)
+13. Run the server with `$ python manage.py runserver`
 
-When the server is running after step 6 of the procedure, the Soft Desk API can be requested from endpoints starting with the following base URL: http://localhost:8000/.
+When the server is running after step 13 of the procedure, the Soft Desk API can be requested from endpoints starting with the following base URL: http://localhost:8000/.
 Since authentification is made with JWT (Json Web Token), the use of postman is recommanded for the API request.
 
 
@@ -21,51 +36,53 @@ Since authentification is made with JWT (Json Web Token), the use of postman is 
 
 For subsequent launches of the application, you only have to execute the following steps from the root folder of the project:
 1. Activate the virtual environment with `$ .venv\Scripts\activate` on windows or `$ source .venv/bin/activate` on macos or linux.
-2. Run the server with `$ python manage.py runserver`
+2. Run the postgres database with `$ postgres -D /usr/local/pgsql/data` (the command may depends on your operating system).
+3. Run the server with `$ python manage.py runserver`
 
-Once you have launched the server, the Soft Desk API can be requested from endpoints starting with the following base URL [http://localhost:8000/](http://localhost:8000/).
+Once you have launched the server, the application can be requested from endpoints starting with the following base URL [http://localhost:8000/](http://localhost:8000/).
 Since authentification is made with JWT (Json Web Token), the use of postman is recommanded for the API request.
 
-You can either register as a new user, or use one of the already created users:
--	Username: aze ; Password: a1z2e3r4
--	Username: ProjectMaker ; Password: a1z2e3r4
--	Username: Contributor ; Password: a1z2e3r4
--	Username: NonContributor ; Password: a1z2e3r4
+You can use already created users from management team (installation step 12) to register new ones:
+-	Username: StaffManagementA ; Password: password
+-	Username: StaffManagementB ; Password: password
+
+The other registered users from sales team are:
+-	Username: StaffSalesA ; Password: password
+-	Username: StaffSalesB ; Password: password
+
+The other registered users from support team are:
+-	Username: StaffSupportA ; Password: password
+-	Username: StaffSupportB ; Password: password
 
 
 ## Usage and detailed endpoint documentation
 
-The 4 following postman collections are already created and can be found in the github folder :
-
-1. Main collection : Contains all API requests.
-2. Test comments collection : To be used for demonstration purpose (connexion with different profils for testing permissions for comments application part).
-3. Test contributor collection : To be used for demonstration purpose (connexion with different profils for testing permissions for contributor application part).
-4. Test issue collection : To be used for demonstration purpose (connexion with different profils for testing permissions for issue application part).
-5. Test project collection : To be used for demonstration purpose (connexion with different profils for testing permissions for project application part).
-
-The main collection contains all allowed endpoints :
+The list of allowed endpoints is the following:
 
 | Description | Method |Endpoint |
 | ----------- | ----------- | ----------- |
-| Register user | POST | /signup/ |	
-| User login | POST	| /login/ |
-| Get all projects related to connected user | GET	| /projects/ |
-| Create a project | POST | /projects/ |
-| Get project details with its id | GET | /projects/{id}/ |
-| Update projet | PUT | /projects/{id}/ |
-| Delete project and related issues | DELETE | /projects/{id}/ |
-| Add user (contributor) to project | POST | /projects/{id}/users/ |
-| Get all users related to project | GET | /projects/{id}/users/ |
-| Delete user from project | DELETE | /projects/{id}/users/{id} |
-| Get all issues related to project | GET | /projects/{id}/issues/ |
-| Create a project related issue | POST | /projects/{id}/issues/ |
-| Update related project issue | PUT | /projects/{id}/issues/{id} |
-| Delete related project issue | DELETE | /projects/{id}/issues/{id} |
-| Create related issue comment | POST | /projects/{id}/issues/{id}/comments/ |
-| Get all issue related comments | GET | /projects/{id}/issues/{id}/comments/ |
-| Modify comment | PUT | /projects/{id}/issues/{id}/comments/{id} |
-| Delete comment | DELETE | /projects/{id}/issues/{id}/comments/{id} |
-| Get comment with its id | GET | /projects/{id}/issues/{id}/comments/{id} |
+| User login | POST | /login/ |
+| Add user | POST | /users/ |
+| Update user | PATCH | /users/{id}/ |
+| Delete user | DELETE | /users/{id}/ |
+| List users | GET | /users/ |
+| Retrieve user details | GET | /users/{id}/ |
+| List clients | GET | /clients/ |
+| Retrieve client details | GET | /clients/{id}/ |
+| Add client | POST | /clients/ |
+| Update client | PATCH | /clients/{id}/ |
+| Change client status to actual | POST | clients/{id}/change_status/ |
+| List contracts | GET | /contracts/ |
+| Retrieve contract details | GET | /contracts/{id}/ |
+| Add contract | POST | /contracts/ |
+| Update contract | PATCH | /contracts/{id}/ |
+| Change contract status to signed | POST | /contracts/{id}/change_status/ |
+| List events related to contract | GET | /contracts/{id}/events/ |
+| Retrieve event details | GET | /events/{id}/ |
+| List events | GET | /events/ |
+| Add event | POST | /events/ |
+| Update event | PATCH | /events/{id}/ |
+
 
 Please refer to the postman collection documentation (available at https://documenter.getpostman.com/view/9694290/Tzm6mba6) for all endpoint description and expected parameters.
 
@@ -73,15 +90,13 @@ Please refer to the postman collection documentation (available at https://docum
 
 Once you have launched the server, the Django default admin panel can be reached by visiting [http://localhost:8000/admin/](http://localhost:8000/admin/).
 
-The super user admin has the following login:
--	Username: admin ; Password: admin
+All management staff members have super user permissions to use the admin panel.
+You can use already created users from management team (installation step 12):
+-	Username: StaffManagementA ; Password: password
+-	Username: StaffManagementB ; Password: password
 
-./manage.py loaddata staffprofile_data.json
-./manage.py loaddata clientstatut_data.json
-./manage.py loaddata contractstatut_data.json
-./manage.py loaddata eventstatut_data.json
-./manage.py loaddata staff_data.json
-./manage.py loaddata client_data.json
-./manage.py loaddata contract_data.json
-./manage.py loaddata event_data.json
+
+## Testing commands
+
+After running the server, the tests can be launched with the command `$ ./manage.py test`.
 

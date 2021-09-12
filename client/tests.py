@@ -57,6 +57,18 @@ class ClientTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
 
+    def test_retrieve_client_as_sales(self):
+        """Test the client retrieve as a sales team member."""
+
+        user = Staff.objects.get(username = 'StaffSalesA')
+        self.client.force_authenticate(user)
+
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["CompanyName"], "ClientA")        
+
     def test_list_client_as_support(self):
         """Test the client list as a support team member."""
 
@@ -68,6 +80,18 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
+
+    def test_retrieve_client_as_support(self):
+        """Test the client retrieve as a support team member."""
+
+        user = Staff.objects.get(username = 'StaffSupportA')
+        self.client.force_authenticate(user)
+
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["CompanyName"], "ClientA")   
 
     def test_list_client_with_fake_JWT(self):
         """Test the client list with a fake Json Web Token."""
@@ -81,10 +105,30 @@ class ClientTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_retrieve_client_with_fake_JWT(self):
+        """Test the client retrieve with a fake Json Web Token."""
+
+        token = 'Fake_Token'
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        url = reverse('clients-detail', kwargs = {'pk': 1})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_list_client_without_JWT(self):
         """Test the client list without a Json Web Token."""
 
         url = reverse('clients-list')
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_retrieve_client_without_JWT(self):
+        """Test the client retrieve without a Json Web Token."""
+
+        url = reverse('clients-detail', kwargs = {'pk': 1})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
