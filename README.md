@@ -1,12 +1,12 @@
 # Application
 
-This application is a back-end application to be executed locally in the context of OpenClassroom educational project. It allow registered users to manage other users, clients, contracts and events (permissions are according their staff department). This application has been developed with the Django rest framework, using a postgres.
+This application is a back-end application to be executed locally in the context of OpenClassroom educational project. It allow registered users to manage other users, clients, contracts and events (permissions are according their staff department). This application has been developed with the Django rest framework, using a postgreSQL database.
 
 ## Installation and first launch
 
 This locally-executable application can be installed and executed from [http://localhost:8000/](http://localhost:8000/) using the following steps.
 
-1. Clone this repository using $ git clone `https://github.com/FortranVBA/DAP10.git` (you can also download the code using [as a zip file](https://github.com/FortranVBA/DAP10/archive/refs/heads/main.zip))
+1. Clone this repository using $ git clone `https://github.com/FortranVBA/DAP12.git` (you can also download the code using [as a zip file](https://github.com/FortranVBA/DAP12/archive/refs/heads/main.zip))
 2. Move to the application root folder.
 3. Create a virtual environment for the project with `$ py -m venv .venv` on windows or `$ python3 -m venv .venv` on macos or linux.
 4. Activate the virtual environment with `$ .venv\Scripts\activate` on windows or `$ source .venv/bin/activate` on macos or linux.
@@ -28,7 +28,7 @@ This locally-executable application can be installed and executed from [http://l
 - `$ ./manage.py loaddata event_data.json` (optional if you want example data)
 13. Run the server with `$ python manage.py runserver`
 
-When the server is running after step 13 of the procedure, the Soft Desk API can be requested from endpoints starting with the following base URL: http://localhost:8000/.
+When the server is running after step 13 of the procedure, the application can be requested from endpoints starting with the following base URL: http://localhost:8000/.
 Since authentification is made with JWT (Json Web Token), the use of postman is recommanded for the API request.
 
 
