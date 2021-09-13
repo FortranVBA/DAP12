@@ -84,7 +84,7 @@ The list of allowed endpoints is the following:
 | Update event | PATCH | /events/{id}/ |
 
 
-Please refer to the postman collection documentation (available at https://documenter.getpostman.com/view/9694290/Tzm6mba6) for all endpoint description and expected parameters.
+Please refer to the postman collection documentation (available at https://documenter.getpostman.com/view/9694290/U16nJPcS) for all endpoint description and expected parameters.
 
 ## Admin panel
 

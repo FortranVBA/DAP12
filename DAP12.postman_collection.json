@@ -35,12 +35,12 @@
 							"urlencoded": [
 								{
 									"key": "username",
-									"value": "ProjectMaker",
+									"value": "StaffManagementA",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "a1z2e3r4",
+									"value": "password",
 									"type": "text"
 								}
 							]
@@ -117,9 +117,6 @@
 				{
 					"name": "add staff",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -127,12 +124,17 @@
 							"urlencoded": [
 								{
 									"key": "username",
-									"value": "aze",
+									"value": "StaffSalesB",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "a1z2e3r4",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "StaffProfileID",
+									"value": "2",
 									"type": "text"
 								}
 							]
@@ -152,16 +154,13 @@
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Add as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user.\n- **StaffProfileID** : ID number of the Staff Profile (in default fixture, 1 for Management, 2 for Sales and 3 for Support).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a management user profile."
 					},
 					"response": []
 				},
 				{
 					"name": "patch staff",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -169,18 +168,25 @@
 							"urlencoded": [
 								{
 									"key": "username",
-									"value": "azer",
-									"type": "text"
+									"value": "StaffSalesA",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "a1z2e3r4",
+									"value": "password",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "StaffProfileID",
+									"value": "3",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/users/6/",
+							"raw": "http://127.0.0.1:8000/users/15/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -191,20 +197,17 @@
 							"port": "8000",
 							"path": [
 								"users",
-								"6",
+								"15",
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Change the staff user fields.\n\n### Expected fields in request body\nNot all fields are required.\n- **username** : Username of the user.\n- **password** : Password of the user.\n- **StaffProfileID** : ID number of the Staff Profile (in default fixture, 1 for Management, 2 for Sales and 3 for Support).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a management user profile."
 					},
 					"response": []
 				},
 				{
 					"name": "delete staff",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -212,7 +215,7 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/users/6/",
+							"raw": "http://127.0.0.1:8000/users/1/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -223,11 +226,11 @@
 							"port": "8000",
 							"path": [
 								"users",
-								"6",
+								"1",
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Delete user.\n\n### Response\n\nIf delete operation is successful, the code 201 is returned.\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a management user profile."
 					},
 					"response": []
 				},
@@ -249,9 +252,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -265,7 +265,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/users/",
+							"raw": "http://127.0.0.1:8000/users?profile=2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -275,11 +275,21 @@
 							],
 							"port": "8000",
 							"path": [
-								"users",
-								""
+								"users"
+							],
+							"query": [
+								{
+									"key": "profile",
+									"value": "2"
+								},
+								{
+									"key": "search",
+									"value": "support",
+									"disabled": true
+								}
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "List all staff users.\n\n### Optional parameters\n\nOptional filter parameters :\n- **profile** : Return users with the specified ID number of the Staff Profile.\n- **search** : Return users with the searched username.\n\n\n### Keys returned in response body\n\nList of staff users with following data :\n- **id** : Id number of staff user.\n- **username** : Username of the new user.\n- **StaffProfileID** : ID number of the Staff Profile (in default fixture, 1 for Management, 2 for Sales and 3 for Support).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a management user profile."
 					},
 					"response": []
 				},
@@ -290,8 +300,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -308,13 +317,7 @@
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/users/1/",
@@ -332,7 +335,7 @@
 								""
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Retrieve user details.\n\n### Keys returned in response body\n\nStaff users with following data :\n- **id** : Id number of staff user.\n- **username** : Username of the new user.\n- **StaffProfileID** : ID number of the Staff Profile (in default fixture, 1 for Management, 2 for Sales and 3 for Support).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a management user profile."
 					},
 					"response": []
 				}
@@ -359,9 +362,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -375,6 +375,91 @@
 							]
 						},
 						"url": {
+							"raw": "http://127.0.0.1:8000/clients/?search=Clien",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clients",
+								""
+							],
+							"query": [
+								{
+									"key": "contact",
+									"value": "13",
+									"disabled": true
+								},
+								{
+									"key": "statut",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "Clien"
+								}
+							]
+						},
+						"description": "List all clients.\n\n### Optional parameters\n\nOptional filter parameters :\n- **contact** : Return clients with the specified staff user id as SalesContactID.\n- **statut** : Return clients with the specified ID number as Client Status.\n- **search** : Return clients with the searched CompanyName.\n\n\n### Keys returned in response body\n\nList of clients with following data :\n- **pk** : Id number of client.\n- **FirstName** : First name of client.\n- **LastName** : Last name of client.\n- **Email** : Client email.\n- **Phone** : Client phone number.\n- **Mobile** : Client mobile phone number.\n- **CompanyName** : Client company name.\n- **DateCreated** : Date when the client was registered in database.\n- **DateUpdated** : Last date when the client was updated in database.\n- **SalesContactID** : ID of staff sales contact of the client.\n- **ClientStatutID** : ID number of the Client Status (in default fixture, 1 for Actual, 2 for Potential).\n\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
+					},
+					"response": []
+				},
+				{
+					"name": "add client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "FirstName",
+									"value": "Testttt",
+									"type": "text"
+								},
+								{
+									"key": "LastName",
+									"value": "SmithD",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "jsd@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "Phone",
+									"value": "+33123456789",
+									"type": "text"
+								},
+								{
+									"key": "Mobile",
+									"value": "+33623456789",
+									"type": "text"
+								},
+								{
+									"key": "CompanyName",
+									"value": "Particulier",
+									"type": "text"
+								},
+								{
+									"key": "SalesContactID",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "ClientStatutID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
 							"raw": "http://127.0.0.1:8000/clients/",
 							"protocol": "http",
 							"host": [
@@ -389,12 +474,12 @@
 								""
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Add a new client.\n\n### Expected fields in request body\n\n- **FirstName** : First name of client.\n- **LastName** : Last name of client.\n- **Email** : Client email.\n- **Phone** : Client phone number.\n- **Mobile** : Client mobile phone number.\n- **CompanyName** : Client company name.\n- **SalesContactID** : ID of staff sales contact of the client.\n- **ClientStatutID** : ID number of the Client Status (in default fixture, 1 for Actual, 2 for Potential).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a sales user profile."
 					},
 					"response": []
 				},
 				{
-					"name": "add client",
+					"name": "change statut client",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -403,51 +488,10 @@
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "FirstName",
-									"value": "JohnD",
-									"type": "text"
-								},
-								{
-									"key": "LastName",
-									"value": "SmithD",
-									"type": "text"
-								},
-								{
-									"key": "Email",
-									"value": "jsd@mail.com",
-									"type": "text"
-								},
-								{
-									"key": "Phone",
-									"value": "+33123456789",
-									"type": "text"
-								},
-								{
-									"key": "Mobile",
-									"value": "+33623456789",
-									"type": "text"
-								},
-								{
-									"key": "CompanyName",
-									"value": "ClientD",
-									"type": "text"
-								},
-								{
-									"key": "SalesContactID",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "ClientStatutID",
-									"value": "2",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/clients/",
+							"raw": "http://127.0.0.1:8000/clients/1/change_status/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -458,19 +502,30 @@
 							"port": "8000",
 							"path": [
 								"clients",
+								"1",
+								"change_status",
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Change the client status to Actual.\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must be the client sales contact."
 					},
 					"response": []
 				},
 				{
 					"name": "patch client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -479,37 +534,44 @@
 								{
 									"key": "FirstName",
 									"value": "JohnE",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "LastName",
 									"value": "SmithD",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Email",
 									"value": "jsd@mail.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Phone",
 									"value": "+33123456789",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Mobile",
 									"value": "+33623456789",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "CompanyName",
-									"value": "ClientD",
-									"type": "text"
+									"value": "ClientA",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "SalesContactID",
-									"value": "2",
-									"type": "text"
+									"value": "13",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "ClientStatutID",
@@ -519,7 +581,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/clients/4/",
+							"raw": "http://127.0.0.1:8000/clients/1/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -530,11 +592,11 @@
 							"port": "8000",
 							"path": [
 								"clients",
-								"4",
+								"1",
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Change the client fields.\n\n### Expected fields in request body\n\nNot all fields are required.\n- **FirstName** : First name of client.\n- **LastName** : Last name of client.\n- **Email** : Client email.\n- **Phone** : Client phone number.\n- **Mobile** : Client mobile phone number.\n- **CompanyName** : Client company name.\n- **SalesContactID** : ID of staff sales contact of the client.\n- **ClientStatutID** : ID number of the Client Status (in default fixture, 1 for Actual, 2 for Potential).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must be :\n- the sales contact of the client.\n- OR have a management staff user profile."
 					},
 					"response": []
 				},
@@ -545,8 +607,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -563,16 +624,10 @@
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/clients/4/",
+							"raw": "http://127.0.0.1:8000/clients/1/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -583,61 +638,11 @@
 							"port": "8000",
 							"path": [
 								"clients",
-								"4",
+								"1",
 								""
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
-					},
-					"response": []
-				},
-				{
-					"name": "delete client (dev only)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/clients/4/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"clients",
-								"4",
-								""
-							]
-						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Retrieve client details.\n\n### Keys returned in response body\n\nClient with following data :\n- **pk** : Id number of client.\n- **FirstName** : First name of client.\n- **LastName** : Last name of client.\n- **Email** : Client email.\n- **Phone** : Client phone number.\n- **Mobile** : Client mobile phone number.\n- **CompanyName** : Client company name.\n- **DateCreated** : Date when the client was registered in database.\n- **DateUpdated** : Last date when the client was updated in database.\n- **SalesContactID** : ID of staff sales contact of the client.\n- **ClientStatutID** : ID number of the Client Status (in default fixture, 1 for Actual, 2 for Potential).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
 					},
 					"response": []
 				}
@@ -653,8 +658,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -664,23 +668,14 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/contracts/",
+							"raw": "http://127.0.0.1:8000/contracts/?statut=1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -692,9 +687,64 @@
 							"path": [
 								"contracts",
 								""
+							],
+							"query": [
+								{
+									"key": "client",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "statut",
+									"value": "1"
+								}
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "List all contracts.\n\n### Optional parameters\n\nOptional filter parameters :\n- **client** : Return contracts with the specified client id.\n- **statut** : Return contracts with the specified ID number as Contract Status.\n\n\n### Keys returned in response body\n\nList of contract with following data :\n- **pk** : Id number of contract.\n- **ClientID** : Id of contract client.\n- **DateCreated** : Date when the contract was registered in database.\n- **DateUpdated** : Last date when the contract was updated in database.\n- **Amount** : Amount budget of the contract.\n- **PaymentDue** : Date of the contract payment due.\n- **ContractStatutID** : ID number of the Contract Status (in default fixture, 1 for Signed, 2 for Not Signed).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
+					},
+					"response": []
+				},
+				{
+					"name": "list contracts events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/1/events/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								"1",
+								"events",
+								""
+							]
+						},
+						"description": "List all events related to the contract.\n\n### Keys returned in response body\n\nList of events with following data :\n- **pk** : Id number of event.\n- **ContractID** : Id of event contract.\n- **DateCreated** : Date when the event was registered in database.\n- **DateUpdated** : Last date when the event was updated in database.\n- **Attendees** : Number of event attendees.\n- **EventDate** : Date of the event.\n- **Notes** : Additional notes related to the event.\n- **SupportContactID** : Id of the staff user support contact.\n- **EventStatutID** : ID number of the Event Status (in default fixture, 1 for Past, 2 for Scheduled).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
 					},
 					"response": []
 				},
@@ -705,8 +755,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -716,20 +765,11 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/contracts/1/",
@@ -747,7 +787,7 @@
 								""
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Retrieve contract details.\n\n### Keys returned in response body\n\nContract with following data :\n- **pk** : Id number of contract.\n- **ClientID** : Id of contract client.\n- **DateCreated** : Date when the contract was registered in database.\n- **DateUpdated** : Last date when the contract was updated in database.\n- **Amount** : Amount budget of the contract.\n- **PaymentDue** : Date of the contract payment due.\n- **ContractStatutID** : ID number of the Contract Status (in default fixture, 1 for Signed, 2 for Not Signed).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
 					},
 					"response": []
 				},
@@ -799,7 +839,40 @@
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Add a new contract.\n\n### Expected fields in request body\n\n- **ClientID** : Id of contract client.\n- **Amount** : Amount budget of the contract.\n- **PaymentDue** : Date of the contract payment due.\n- **ContractStatutID** : ID number of the Contract Status (in default fixture, 1 for Signed, 2 for Not Signed).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a sales user profile."
+					},
+					"response": []
+				},
+				{
+					"name": "change statut contract",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/contracts/1/change_status/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"contracts",
+								"1",
+								"change_status",
+								""
+							]
+						},
+						"description": "Change the contract status to Signed.\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must be the sales contact of the contract client."
 					},
 					"response": []
 				},
@@ -852,57 +925,7 @@
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
-					},
-					"response": []
-				},
-				{
-					"name": "delete contract (dev only)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/contracts/4/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"contracts",
-								"4",
-								""
-							]
-						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Change the contract fields.\n\n### Expected fields in request body\n\nNot all fields are required.\n- **ClientID** : Id of contract client.\n- **Amount** : Amount budget of the contract.\n- **PaymentDue** : Date of the contract payment due.\n- **ContractStatutID** : ID number of the Contract Status (in default fixture, 1 for Signed, 2 for Not Signed).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must be :\n- the sales contact of the contract client.\n- OR have a management staff user profile."
 					},
 					"response": []
 				}
@@ -918,8 +941,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -929,9 +951,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -939,7 +958,7 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/events/",
+							"raw": "http://127.0.0.1:8000/events/?contact=4&statut=2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -951,14 +970,24 @@
 							"path": [
 								"events",
 								""
+							],
+							"query": [
+								{
+									"key": "contact",
+									"value": "4"
+								},
+								{
+									"key": "statut",
+									"value": "2"
+								}
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "List all events.\nThe event status (past or scheduled) is also updated according the current date time.\n\n### Optional parameters\n\nOptional filter parameters :\n- **client** : Return events with the specified staff user support id.\n- **statut** : Return events with the specified ID number as Event Status.\n\n\n### Keys returned in response body\n\nList of events with following data :\n- **pk** : Id number of event.\n- **ContractID** : Id of event contract.\n- **DateCreated** : Date when the event was registered in database.\n- **DateUpdated** : Last date when the event was updated in database.\n- **Attendees** : Number of event attendees.\n- **EventDate** : Date of the event.\n- **Notes** : Additional notes related to the event.\n- **SupportContactID** : Id of the staff user support contact.\n- **EventStatutID** : ID number of the Event Status (in default fixture, 1 for Past, 2 for Scheduled).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
 					},
 					"response": []
 				},
 				{
-					"name": "duplicate event",
+					"name": "detail event",
 					"event": [
 						{
 							"listen": "test",
@@ -975,20 +1004,11 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/events/1/",
@@ -1006,16 +1026,13 @@
 								""
 							]
 						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Retrieve event details.\n\n### Keys returned in response body\n\nContract with following data :\n- **pk** : Id number of event.\n- **ContractID** : Id of event contract.\n- **DateCreated** : Date when the event was registered in database.\n- **DateUpdated** : Last date when the event was updated in database.\n- **Attendees** : Number of event attendees.\n- **EventDate** : Date of the event.\n- **Notes** : Additional notes related to the event.\n- **SupportContactID** : Id of the staff user support contact.\n- **EventStatutID** : ID number of the Event Status (in default fixture, 1 for Past, 2 for Scheduled).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated."
 					},
 					"response": []
 				},
 				{
 					"name": "add event",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1033,7 +1050,7 @@
 								},
 								{
 									"key": "EventDate",
-									"value": "2001-10-23 13:30:00",
+									"value": "2051-10-23 13:30:00",
 									"type": "text"
 								},
 								{
@@ -1068,16 +1085,13 @@
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
+						"description": "Add a new event.\n\n### Expected fields in request body\n\n- **ContractID** : Id of event contract.\n- **Attendees** : Number of event attendees.\n- **EventDate** : Date of the event.\n- **Notes** : Additional notes related to the event.\n- **SupportContactID** : Id of the staff user support contact.\n- **EventStatutID** : ID number of the Event Status (in default fixture, 1 for Past, 2 for Scheduled).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must have a sales user profile."
 					},
 					"response": []
 				},
 				{
 					"name": "patch event",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -1086,32 +1100,37 @@
 								{
 									"key": "ContractID",
 									"value": "1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Attendees",
 									"value": "800",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "EventDate",
 									"value": "2001-10-23 13:30:00",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Notes",
-									"value": "Nooootes",
+									"value": "Nootes",
 									"type": "text"
 								},
 								{
 									"key": "SupportContactID",
 									"value": "4",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "EventStatutID",
 									"value": "2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -1131,61 +1150,41 @@
 								""
 							]
 						},
-						"description": "Signup as a new user.\n\n### Expected fields in request body\n\n- **username** : Username of the new user.\n- **password** : Password of the new user."
-					},
-					"response": []
-				},
-				{
-					"name": "delete event (dev only)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.access);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh",
-									"value": "{{token_refresh}}",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/events/4/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"events",
-								"4",
-								""
-							]
-						},
-						"description": "Refresh access for previously logged user.\n\n### Expected fields in request body\n\n- **refresh** : Refresh token value of the previously logged user.\n\n### Keys returned in response body\n\n- **access** : Access token to be used for authentification. The value is automatically assigned to the collection variable `token`."
+						"description": "Change the contract fields.\n\n### Expected fields in request body\n\nNot all fields are required.\n- **ContractID** : Id of event contract.\n- **Attendees** : Number of event attendees.\n- **EventDate** : Date of the event.\n- **Notes** : Additional notes related to the event.\n- **SupportContactID** : Id of the staff user support contact.\n- **EventStatutID** : ID number of the Event Status (in default fixture, 1 for Past, 2 for Scheduled).\n\n### Authentication\n\nRequires bearer token authentication (value is stored in collection variable `token` during login).\n\n### Permission\nThe user must be authenticated and must be :\n- the sales contact of the contract client.\n- OR the staff support contact.\n- OR have a management staff user profile."
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
